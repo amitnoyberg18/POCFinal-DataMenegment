@@ -9,6 +9,7 @@ button{
   position:relative;
   color: black;
 }
+
 /* Home button */
 .Home{
   margin-right: 10%;
@@ -39,6 +40,12 @@ button{
 
 }
 .btnPrev:hover{
+  background-color: #5a4dff;
+  color: #ffffff;
+  border: 2px solid #5a4dff;
+}
+.backPrevByKey{
+
   background-color: #5a4dff;
   color: #ffffff;
   border: 2px solid #5a4dff;

@@ -12,6 +12,7 @@ interface Istate{
 
 function App() {
   const [isFirstPageActive,setIsFirstPageActive] = useState(true);
+  const [isHistoryActive,setIsHistoryActive] = useState(false);
   const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
     const newCard = dataCardTree()[0];
     return newCard;
@@ -32,7 +33,7 @@ function App() {
           })     
           return theCard.prevCard            
         }
-        setIsFirstPageActive(true);
+        // setIsFirstPageActive(true);
         return theCard
   
         })
@@ -47,10 +48,8 @@ function App() {
               const btnPrev=document.getElementById('btnPrevQuesiton')
               btnPrev?.classList.add("backPrevByKey")
               backToPrevCard();
-
               setTimeout(() => {
                 btnPrev?.classList.remove("backPrevByKey")
-
               }, 500);
                            
             }
@@ -80,11 +79,12 @@ function App() {
             setCard(dataCardTree()[0]);
             setHistory([]);
             setIsFirstPageActive(true);
+            setIsHistoryActive(false);
           }}>בית</button>
-          <button className="History">היסטוריה</button>
+          <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} className="History">היסטוריה</button>
           </div>
-          
-        <MainPage card={card} setCard={setCard} setHistory={setHistory}/>
+          {/* the MainPage has the FinalAnswerPage */}
+        <MainPage isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
       </>
       
       }

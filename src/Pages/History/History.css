@@ -1,0 +1,31 @@
+.history{
+    position: relative;
+    /* border: 2px solid black; */
+    padding: 2%;
+    background-color: rgb(250, 248, 255);;
+}
+.historyCloseButton{
+    position: relative;
+    float: right;
+}
+.historyCloseButton:hover{
+    background-color: #5a4dff;
+    color: #ffffff;
+    border: 2px solid #5a4dff;
+}
+.historyItem{
+    position: relative;
+    border: 2px solid #e0e2ee;
+    border-radius: 15px;
+    height: 50%;
+    width: 40%;
+    margin:auto;
+    margin-top: 2%;
+    background-color:#ffffff;
+    transition: background-color 1s,color 1s;
+  }
+.historyItem:hover{
+    background-color: #5a4dff;
+    color: #ffffff;
+    border: 2px solid #5a4dff;
+}

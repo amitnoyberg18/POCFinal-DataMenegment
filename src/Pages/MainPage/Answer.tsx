@@ -30,7 +30,13 @@ const Answer: React.FC<IProps> = ({answer,setCard,index,setHistory}) => {
     },[index,setCard,setHistory])
     const  handleKeyPress =  useCallback((e) => {
             if(e.code === 'Digit'+(index+1)){
-                onSelectAnswer();             
+                // const btnAns=document.getElementById(index.toString())
+                // btnAns?.classList.add("answerSelectedByKey")
+                onSelectAnswer();
+                // setTimeout(() => {
+                //     onSelectAnswer(); 
+                //     btnAns?.classList.remove("answerSelectedByKey")
+                //   }, 500);            
             }
       }, [index,onSelectAnswer]);
     

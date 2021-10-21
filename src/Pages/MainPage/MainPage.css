@@ -1,21 +1,23 @@
 /* the search box */
   .Search{
     position: relative;
-    padding-bottom: 2%;
+    width:100%;
   }
-  .searchBox{
+  /* .searchBox{
     margin-top: 2.5%;
-    margin-left: 22%;
-  }
-  .searchBoxtitle{
+    margin-left: 28%;
+  } */
+  /* .searchBoxtitle{
     float: right;
     margin-right: 32%;
-  }
+  } */
   /* the main area of the questions and anwers */
   .TheQuestionPage{
     position: relative;
     margin: auto;
     width: 50%;
+    padding-bottom:10%;
+    /* border: 2px solid black; */
     margin-top: 2%;
   }
   .question{
@@ -24,31 +26,40 @@
     font-size: large;
   }
   .answer{
+    cursor: pointer;
     position: relative;
     border: 2px solid #e0e2ee;
     border-radius: 15px;
     height: 50%;
-    width: 35%;
+    width: 40%;
     margin:auto;
     margin-top: 2%;
     background-color:#ffffff;
     transition: background-color 1s,color 1s;
     float: right;
-    margin-right: 10%;
-    
+    margin-right: 8%;
   }
   .answer:hover{
     background-color: #5a4dff;
     color: #ffffff;
     border: 2px solid #5a4dff;
-  
+  }
+  /* this class does an over on an answer when pressing a key BUT it doesnt work yet */
+  .answerSelectedByKey{
+    background-color: #5a4dff;
+    color: #ffffff;
+    border: 2px solid #5a4dff;
   }
   /* the common questions area */
   .commonAnswers{
     position: relative;
-    margin-top: 40%;
+    margin-top: 16%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
   }
   .answerObj{
+    cursor: pointer;
     position: relative;
     float: right;
     width: 20%;
@@ -59,7 +70,6 @@
     color: black;
     border: 2px solid #e7e7e7;
     margin-left: 2%;
-    margin-top: 3%;
     transition: background-color 1s,color 1s;
   }
   .answerObj:hover{

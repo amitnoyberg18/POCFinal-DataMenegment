@@ -17,7 +17,11 @@ const FirstPage: React.FC<IProps>=({setIsFirstPageActive,setCard})=>{
     return (
         <div className="FirstPage">
             <h1>ברוך הבא למערכת לניהול ידע</h1>
-            <button className="btnStart" onClick={()=>setIsFirstPageActive(false)} >היכנס לאפליקציה</button>
+            <button className="btnStart" onClick={()=>{
+                setIsFirstPageActive(false)
+                setCard(dataCardTree()[0]);
+            }}
+                 >היכנס לאפליקציה</button>
             <div className="InCargeSelection">
                 <hr />
                 <h2>בחירת האחמ"ש :</h2>
