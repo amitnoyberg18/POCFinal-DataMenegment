@@ -1,38 +1,45 @@
-.App {
-  text-align: center;
+button{
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #e7e7e7;
+  border-radius: 5px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.buttons{
+  position:relative;
+  color: black;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Home button */
+.Home{
+  margin-right: 10%;
+  float: right;
+  transition: background-color 1s,color 1s;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Home:hover{
+  background-color: #5a4dff;
+  color: #ffffff;
+  border: 2px solid #5a4dff;
 }
-
-.App-link {
-  color: #61dafb;
+/* History Button */
+.History{
+  margin-right: 1%;
+  float: right;
+  transition: background-color 1s,color 1s;
 }
+.History:hover{
+  background-color: #5a4dff;
+  color: #ffffff;
+  border: 2px solid #5a4dff;
+}
+/* Back button */
+.btnPrev{
+  margin-left: 10%;
+  float: left;
+  transition: background-color 1s,color 1s;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.btnPrev:hover{
+  background-color: #5a4dff;
+  color: #ffffff;
+  border: 2px solid #5a4dff;
 }

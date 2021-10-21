@@ -1,0 +1,30 @@
+.finalDiv{
+    position: relative;
+    font-size:smaller;
+    text-align: right;
+    background-color: white;
+    border:2px solid #e0e2ee;
+    border-radius: 13px;
+    padding: 1%;
+    padding-left: 10%;
+    max-width: 30%;
+    margin: auto;
+    margin-top: 2%;
+  }
+.backToStart{
+  position: relative;
+  transition: background-color 0.7s,color 0.7s;
+  border: 2px solid #5a4dff;
+  border-radius: 10px;
+  width:20%;
+  padding: 1%;
+  margin-top:5%;
+  background-color:#ffffff;
+  
+}
+.backToStart:hover{
+  background-color: #5a4dff;
+  color: #ffffff;
+}
+
+

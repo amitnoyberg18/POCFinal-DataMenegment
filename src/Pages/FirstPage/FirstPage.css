@@ -1,0 +1,46 @@
+/* Top */
+.FirstPage{
+    position: relative;
+    padding: 1%;
+}
+.btnStart{
+    position: relative;
+    padding: 3%;
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    margin-top: 3%;
+    transition: background-color 1s,color 1s;
+  
+}
+.btnStart:hover{
+    background-color: #5a4dff;
+    color: #ffffff;
+    border: 2px solid #5a4dff;
+}
+/* bottom */
+.InCargeSelection{
+    position: relative;
+    padding: 10%;
+}
+.InchargeSelectedCard{
+    position: relative;
+    border: 2px solid #e0e2ee;
+    border-radius: 15px;
+    padding: 1%;
+    height: 50%;
+    width: 20%;
+    margin-top: 1%;
+    background-color:#ffffff;
+    transition: background-color 1s,color 1s;
+    float: right;
+    margin-right: 2%;
+    
+}
+.InchargeSelectedCard:hover{
+    background-color: #5a4dff;
+    color: #ffffff;
+    border: 2px solid #5a4dff;
+  
+}
