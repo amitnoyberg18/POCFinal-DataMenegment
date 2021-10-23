@@ -13,6 +13,7 @@ interface Istate{
 function App() {
   const [isFirstPageActive,setIsFirstPageActive] = useState(true);
   const [isHistoryActive,setIsHistoryActive] = useState(false);
+  const [selectValue,setSelectValue] = useState("");
   const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
     const newCard = dataCardTree()[0];
     return newCard;
@@ -24,7 +25,7 @@ function App() {
   const backToPrevCard = ()=>{
     setTimeout(() => {
       setCard((theCard : CardTree )=>{
-
+        
         if(theCard?.prevCard!==undefined){   
            setHistory((prevHistory)=>{
             prevHistory.pop()
@@ -33,9 +34,11 @@ function App() {
           })     
           return theCard.prevCard            
         }
-        // setIsFirstPageActive(true);
-        return theCard
-  
+        setIsFirstPageActive(true);
+        setIsHistoryActive(false);
+        // setHistory([]);
+        setSelectValue("-1");
+        return theCard        
         })
     }, 0);
 
@@ -45,13 +48,38 @@ function App() {
     const handleKeyPress = (e:any) => {
         if(e.keyCode !== undefined){
             if(e.keyCode===27){
-              const btnPrev=document.getElementById('btnPrevQuesiton')
-              btnPrev?.classList.add("backPrevByKey")
-              backToPrevCard();
-              setTimeout(() => {
-                btnPrev?.classList.remove("backPrevByKey")
-              }, 500);
-                           
+              // if(isHistoryActive){
+              //   console.log(isHistoryActive);
+              //   setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)
+              // }else{
+                backToPrevCard();
+                const btnPrev=document.getElementById('btnPrevQuesiton')
+                btnPrev?.classList.add("backPrevByKey")
+                // if(card === dataCardTree()[0]){
+                //   setSelectValue("-1");
+                // }
+                setTimeout(() => {
+                  btnPrev?.classList.remove("backPrevByKey")
+                }, 400);
+              // }
+              //  const select = document.getElementById("answersSelect");  
+              //  select.selectedIndex === "-1"; 
+
+              // const answersList = dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined); 
+              // if(card.prevCard !== undefined){
+              //   if(answersList.indexOf(card.prevCard)){
+              //     setSelectValue((prevSelectValue)=>{
+              //       const thisCard = answersList[Number(prevSelectValue)];
+              //       const prevCard = thisCard.prevCard;
+              //       if(prevCard !== undefined){
+              //         return answersList.indexOf(prevCard).toString();
+              //       }
+              //       return prevSelectValue
+              //     }) 
+              //     }
+              // }
+
+             
             }
         }
 
@@ -79,12 +107,13 @@ function App() {
             setCard(dataCardTree()[0]);
             setHistory([]);
             setIsFirstPageActive(true);
+            setSelectValue("-1");
             setIsHistoryActive(false);
           }}>בית</button>
           <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} className="History">היסטוריה</button>
           </div>
           {/* the MainPage has the FinalAnswerPage */}
-        <MainPage isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
+        <MainPage selectValue={selectValue} setSelectValue={setSelectValue} isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
       </>
       
       }

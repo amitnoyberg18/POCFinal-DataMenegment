@@ -13,6 +13,7 @@ const CommonAnswers: React.FC<IProps>=({card,setCard,setHistory})=>{
       <div className="answerObj" onClick={()=>{
           setCard((prevCard:CardTree)=>{
               card.prevCard = prevCard;
+              prevCard.indexSelectedAnswer=undefined;
               setHistory((history:CardTree[])=>{
                 history.push(prevCard);
                 // let pp = history.filter( (ele, ind) => ind === history.findIndex( elem => elem.id === ele.id && elem.id === ele.id))

@@ -8,8 +8,9 @@ interface IProps{
     crmDetails:string[];
     setCard: Function;
     setHistory:Function;
+    setSelectValue:Function;
 }
-const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,setHistory}) => {
+const FinalAnswerPage: React.FC<IProps> = ({setSelectValue,theWayToSolve,crmDetails,setCard,setHistory}) => {
 
 
     return (    
@@ -31,6 +32,7 @@ const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,set
                         {
                             setCard(()=>dataCardTree()[0]);
                             setHistory([]);
+                            setSelectValue("-1");
                         }
                         }
                         >חזרה לתחילת השאלון</button>

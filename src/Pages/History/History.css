@@ -1,8 +1,11 @@
 .history{
+    background-color: rgb(234, 228, 250);
+    border:1px solid #5a4dff;
     position: relative;
     /* border: 2px solid black; */
     padding: 2%;
-    background-color: rgb(250, 248, 255);;
+    border-radius: 15px;
+    margin-top: 1%;
 }
 .historyCloseButton{
     position: relative;
