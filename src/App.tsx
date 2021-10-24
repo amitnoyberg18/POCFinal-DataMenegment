@@ -4,6 +4,8 @@ import FirstPage from './Pages/FirstPage/FirstPage';
 import {dataCardTree} from "./data/data";
 import {CardTree} from './models/cardTree';
 import MainPage from './Pages/MainPage/MainPage';
+// import historyPng from "../src/icons/history.png";
+import HomePng from "../src/icons/backHomePage.png";
 
 interface Istate{
   cardTreeObj :CardTree;
@@ -109,8 +111,9 @@ function App() {
             setIsFirstPageActive(true);
             setSelectValue("-1");
             setIsHistoryActive(false);
-          }}>בית</button>
-          <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} className="History">היסטוריה</button>
+          }}><img src={HomePng} style={{width:"20px",height:"18px"}} alt="Home"></img></button>
+          <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} style={{width:"35px",height:"28px"}} className="History">⌛</button>
+          
           </div>
           {/* the MainPage has the FinalAnswerPage */}
         <MainPage selectValue={selectValue} setSelectValue={setSelectValue} isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
