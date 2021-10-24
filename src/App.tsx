@@ -4,7 +4,7 @@ import FirstPage from './Pages/FirstPage/FirstPage';
 import {dataCardTree} from "./data/data";
 import {CardTree} from './models/cardTree';
 import MainPage from './Pages/MainPage/MainPage';
-// import historyPng from "../src/icons/history.png";
+import historyPng from "../src/icons/history.png";
 import HomePng from "../src/icons/backHomePage.png";
 
 interface Istate{
@@ -112,7 +112,7 @@ function App() {
             setSelectValue("-1");
             setIsHistoryActive(false);
           }}><img src={HomePng} style={{width:"20px",height:"18px"}} alt="Home"></img></button>
-          <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} style={{width:"35px",height:"28px"}} className="History">⌛</button>
+          <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} className="History"><img style={{width:"20px",height:"18px"}} src={historyPng} alt="history" /></button>
           
           </div>
           {/* the MainPage has the FinalAnswerPage */}

@@ -3,6 +3,7 @@ import "./FirstPage.css"
 import {dataCardTree} from '../../data/data';
 import InCargeSelection from "./InChargeSelection";
 import { CardTree } from "../../models/cardTree";
+import compass from "../../icons/compass.png"
 
 
 interface IProps{
@@ -16,6 +17,7 @@ const FirstPage: React.FC<IProps>=({setIsFirstPageActive,setCard})=>{
     console.log(inCargeSelection);
     return (
         <div className="FirstPage">
+            <img id="compass" src={compass} alt="compass"/>
             <h1>ברוך הבא למערכת לניהול ידע</h1>
             <button className="btnStart" onClick={()=>{
                 setIsFirstPageActive(false)

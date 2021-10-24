@@ -6,8 +6,8 @@ import History from "../History/History";
 import CommonAnswers from "../MainPage/CommonAnswers/CommonAnswers";
 import {dataCardTree} from "../../data/data";
 
-
 import "./MainPage.css";
+// import { isTemplateSpan } from "typescript";
 
 interface IProps{
     selectValue:string;
@@ -80,7 +80,7 @@ const MainPage: React.FC<IProps> = ({selectValue,setSelectValue,card,setHistory,
             <hr />
               <h1>תשובות נפוצות</h1>
 
-              {dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined).map((item:CardTree,index:number)=>{
+              {dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined &&item.clicked>30).map((item:CardTree,index:number)=>{
                 return <CommonAnswers key={index} setHistory={setHistory} card={item} setCard={setCard}/>
               })}
             </div>}
