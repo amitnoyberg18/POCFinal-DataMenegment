@@ -17,7 +17,7 @@ button{
   transition: background-color 1s,color 1s;
 }
 .Home:hover{
-  background-color: #5a4dff;
+  background-color: #928bf7;
   color: #ffffff;
   border: 2px solid #5a4dff;
 }
@@ -28,7 +28,7 @@ button{
   transition: background-color 1s,color 1s;
 }
 .History:hover{
-  background-color: #5a4dff;
+  background-color: #928bf7;
   color: #ffffff;
   border: 2px solid #5a4dff;
 }
@@ -40,7 +40,7 @@ button{
 
 }
 .btnPrev:hover{
-  background-color: #5a4dff;
+  background-color: #928bf7;
   color: #ffffff;
   border: 2px solid #5a4dff;
 }

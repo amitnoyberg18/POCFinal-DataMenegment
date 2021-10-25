@@ -16,7 +16,7 @@ export const dataCardTree = () =>{
     const c7 : CardTree={id:7,questionText:"שאלונים",answers:["גיוס","מתגייסים ברשת","תקלות באתר","תקלות באתר"],clicked:31}
     const c8 : CardTree={id:8,questionText:"האם קיים בSAP?",answers:[ "לא","כן"],clicked:30}
     const c9 : CardTree={id:9,questionText:'העבר פניה למדור תו"ם',answers:[ "לא","כן"],clicked:33}    
-    const c10 : CardTree={id:10,questionText:"לעשות הסבה, להנחות להמתין לפחות 24 שעות",answers:["גיוס","מתגייסים ברשת","לא מצליח להתחבר לאתר","לא מצליח להתחבר לאתר"],clicked:30}
+    const c10 : CardTree={id:10,questionText:"לעשות הסבה, להנחות להמתין לפחות 24 שעות ולהיכנס עם סיסמא ראשונית(סוג מידע 105)",answers:["גיוס","מתגייסים ברשת","לא מצליח להתחבר לאתר","לא מצליח להתחבר לאתר"],clicked:30}
     const c11 : CardTree={id:11,questionText:"לבדוק ולעשות הסבה",answers:["גיוס","מתגייסים ברשת","חוסר/פער בנתונים","חוסר/פער בנתונים"],clicked:33}
     const c12 : CardTree={id:12,questionText:"תודה רבה נגמר",answers:["גיוס","מתגייסים ברשת","לא מצליח להתחבר לאתר","לא מצליח להתחבר לאתר"],clicked:30}
     

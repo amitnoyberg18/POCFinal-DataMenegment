@@ -6,6 +6,7 @@ import {CardTree} from './models/cardTree';
 import MainPage from './Pages/MainPage/MainPage';
 import historyPng from "../src/icons/history.png";
 import HomePng from "../src/icons/backHomePage.png";
+import BackPng from "./icons/back.png";
 
 interface Istate{
   cardTreeObj :CardTree;
@@ -104,7 +105,8 @@ function App() {
       {!isFirstPageActive &&
       <>
         <div className="buttons">
-          <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}>&#x21B6;</button>
+          {/* <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}>&#x21B6;</button> */}
+          <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}><img src={BackPng} style={{width:"20px",height:"18px"}} alt="Home"></img></button>
           <button className="Home" onClick={()=>{
             setCard(dataCardTree()[0]);
             setHistory([]);
