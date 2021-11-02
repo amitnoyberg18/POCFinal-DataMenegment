@@ -103,23 +103,23 @@ function App() {
     <div className="App">
       {isFirstPageActive &&<FirstPage setCard={setCard} setIsFirstPageActive={setIsFirstPageActive}/>}
       {!isFirstPageActive &&
-      <>
+      <div className="page">
         <div className="buttons">
           {/* <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}>&#x21B6;</button> */}
-          <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}><img src={BackPng} style={{width:"20px",height:"18px"}} alt="Home"></img></button>
+          <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}><img src={BackPng} style={{width:"25px"}} alt="Home"></img></button>
           <button className="Home" onClick={()=>{
             setCard(dataCardTree()[0]);
             setHistory([]);
             setIsFirstPageActive(true);
             setSelectValue("-1");
             setIsHistoryActive(false);
-          }}><img src={HomePng} style={{width:"20px",height:"18px"}} alt="Home"></img></button>
-          <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} className="History"><img style={{width:"20px",height:"18px"}} src={historyPng} alt="history" /></button>
+          }}><img src={HomePng} style={{width:"25px"}} alt="Home"></img></button>
+          <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} className="History"><img style={{width:"25px"}} src={historyPng} alt="history" /></button>
           
           </div>
           {/* the MainPage has the FinalAnswerPage */}
         <MainPage selectValue={selectValue} setSelectValue={setSelectValue} isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
-      </>
+      </div>
       
       }
     </div>
