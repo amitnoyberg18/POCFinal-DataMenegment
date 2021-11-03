@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef } from "react";
 import "./FinalAnswerPage.css";
 import {dataCardTree} from "../../data/data"
-import copyPasteimg from '../../icons/copyPaste.png'
-import copySuccessImg from '../../icons/history.png'
+import copyPasteimg from '../../icons/copy.jpg'
+import copySuccessImg from '../../icons/checkIcon.png'
 import { setTimeout } from "timers";
 
 interface IProps{
