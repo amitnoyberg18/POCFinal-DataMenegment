@@ -2,6 +2,9 @@ import React, {useState, useEffect, useRef } from "react";
 import "./FinalAnswerPage.css";
 import {dataCardTree} from "../../data/data"
 import copyPasteimg from '../../icons/copyPaste.png'
+import copySuccessImg from '../../icons/history.png'
+import { setTimeout } from "timers";
+
 interface IProps{
     // cardQuestionnaire: CardQuestionnaire<string>;
     theWayToSolve: string;
@@ -11,16 +14,31 @@ interface IProps{
     setSelectValue:Function;
 }
 const FinalAnswerPage: React.FC<IProps> = ({setSelectValue,theWayToSolve,crmDetails,setCard,setHistory}) => {
-      const [isCopy,setIsCopy]=useState<boolean>(false)
+    
+     const [isCopy,setIsCopy]=useState<boolean>(false)
+     
+     useEffect(()=>{
+        inputRef.current?.focus();
+    },[])
+
 
     const copyPasteAnswer =()=>{
         navigator.clipboard.writeText(theWayToSolve);
+            setIsCopy(!isCopy)
+        if(isCopy){
+            setTimeout(()=>copyPasteAnswer(), 3000);
+        }
+
+        //שארי כמה שניות ישתנה לתמונה האחרת
     }
     const inputRef=useRef<HTMLButtonElement>(null);
 
-    useEffect(()=>{
-        inputRef.current?.focus();
-    },[])
+
+    const copyPasteImgFun=()=>{
+        return copyPasteimg;
+    }
+
+
     return (    
         <div style={{marginTop:"4%"}}>
                 <h1>שם התשובה הסופית</h1>            
@@ -38,7 +56,7 @@ const FinalAnswerPage: React.FC<IProps> = ({setSelectValue,theWayToSolve,crmDeta
                         
                         </h2>
                         <button onClick={copyPasteAnswer}>
-                            <img src={bool ? copyPasteimg : suscimg} style={{width:"20px",height:"18px"}} ></img>
+                            <img src={isCopy ? copySuccessImg : copyPasteimg} style={{width:"20px",height:"18px"}} ></img>
                             </button>
 
                       
