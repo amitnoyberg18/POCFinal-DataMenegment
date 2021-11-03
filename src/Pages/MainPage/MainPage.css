@@ -1,10 +1,8 @@
 /* the search box */
   .Search{
     position: relative;
-    margin-right: 20%;
-    margin-left: 35%;
-    
-
+    margin-right: 25%;
+    width:50%;
     /* background-color: violet; */
   }
   /* .searchBox{
@@ -13,7 +11,7 @@
   } */
   /* .searchBoxtitle{
     float: right;
-    margin-right: 32%;
+    
   } */
   .searchInputs{
     display: flex;
@@ -21,14 +19,13 @@
   .Search input{
     background-color:white;
     border: 0;
-    font-size: 18px;
-    padding: 15px;
-    height: 30px;
-    width: 300px;
+    border-radius: 0px;
+    font-size: 14px;
+    padding: 3%;
+    width: 100%;
   }
   .searchIcon{
-    height: 60px;
-    width: 50px;
+    width:10%;
     background-color: white;
     display: grid;
     place-items: center;
@@ -37,11 +34,12 @@
     outline: none;
   }
   .searchIcon svg{
-    font-size: 25px;
+    font-size: 105%;
   }
   .dataResult {
-    width: 300px;
-    height: 200px;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
@@ -53,8 +51,10 @@
   }
   
   .dataResult .dataItem {
+    position:relative;
+    min-height: auto;
+    padding: 2%;
     width: 100%;
-    height: 50px;
     display: flex;
     align-items: center;
     color: black;
@@ -70,7 +70,9 @@
   a:hover {
     background-color: lightgrey;
   }
-  
+  #clearButton{
+    cursor: pointer;
+  }
 /* .dataResult{
   width:100%;
   height:30%;

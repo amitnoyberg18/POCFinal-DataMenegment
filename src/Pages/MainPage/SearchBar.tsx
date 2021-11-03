@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import { CardTree } from "../../models/cardTree";
 import {dataCardTree} from "../../data/data";
-import SearchIcon from '@material-ui/icons/Search'
-
+import SearchIcon from '@material-ui/icons/Search';
+import CloseIcon from '@material-ui/icons/Close';
 interface IProps{
     selectValue:string;
     setSelectValue:Function;
@@ -36,27 +36,60 @@ const SearchBar:React.FC<IProps> = ({selectValue,setSelectValue,setHistory,setCa
     //             setSelectValue(e.target.value);
     //             }}>
     //             <option key="-1" value="-1"></option>
-    //             {dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined).map((item:CardTree,index:number)=>{
+    //             {dataCardTree(().filter((item:CardTree,index:number)=>item.nextCards === undefined).map((item:CardTree,index:number)=>{
     //                 return <option key={index} value={index.toString()}>{item.questionText}</option>
     //             })}
     //             </select>
-    //         </div>
-    
+    //         </div>)
+    const [data,setData] = useState(()=>dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined));
+    const [filterData,setFilterData]=useState<CardTree[]>([]);
+    const [value,setValue] = useState<string>("") 
+
+
+    const handleFilter = (e:React.ChangeEvent<HTMLInputElement>)=>{
+        
+        const newFilter = data.filter((item:CardTree)=>{
+            return item.questionText.includes(e.target.value);
+        });
+        setFilterData(newFilter);
+        setValue(e.target.value);
+    }
+
     return <div className="Search">
         <div className="searchInputs">
-            <input type="text" placeholder="חיפוש..." />
+        {/* <label className="searchBoxtitle">חיפוש תשובות סופיות:</label> */}
+            <input type="text" placeholder="חיפוש תשובות סופיות..." value={value} onChange={handleFilter}/>
             <div className="searchIcon">
-                <SearchIcon />
+                {value ? <CloseIcon  id="clearButton" onClick={()=>{
+                    setValue("");
+                }}/>:<SearchIcon/>}
             </div>
         </div>
+        {filterData.length !== 0 && value !=="" &&
         <div className="dataResult">
-            {dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined).map((item:CardTree,index:number)=>{
+            {filterData.slice(0,5).map((item:CardTree,index:number)=>{
                     // return <option key={index} value={index.toString()}>{item.questionText}</option>
                     return <a key={index} className="dataItem" onClick={()=>{
-                        setCard(item)
+                        setFilterData([]);
+                        setCard((prevCard:CardTree)=>{
+                            item.prevCard=prevCard;
+                            prevCard.indexSelectedAnswer=undefined;
+                            setHistory((history:CardTree[])=>{
+                                if(history.includes(prevCard)){
+                                    const index =history.indexOf(prevCard);
+                                    history.splice(index,1);
+                                }
+                                history.push(prevCard);
+                                // let pp = history.filter( (ele, ind) => ind === history.findIndex( elem => elem.id === ele.id && elem.id === ele.id))
+                                return history;
+                            });
+                            return item;
+                        });
+                        setValue("");
                     }}>{item.questionText}</a>
                  })}
         </div>
+}
     </div>
 }
 
