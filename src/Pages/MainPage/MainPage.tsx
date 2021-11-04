@@ -5,6 +5,7 @@ import Answer from "./Answer";
 import History from "../History/History";
 import CommonAnswers from "../MainPage/CommonAnswers/CommonAnswers";
 import {dataCardTree} from "../../data/data";
+import SearchBar from "./SearchBar";
 
 import "./MainPage.css";
 // import { isTemplateSpan } from "typescript";
@@ -28,40 +29,12 @@ const MainPage: React.FC<IProps> = ({selectValue,setSelectValue,card,setHistory,
         return []
       }
       
-
     return (
         <div className="Main">
 
           <div className="TheQuestionPage">
-            <div className="Search">
-                  <label className="searchBoxtitle">חיפוש תשובות סופיות:</label>
-                  {/* <input className="searchBox" type="text" /> */}
-                  <select value={selectValue} id="answersSelect" style={{width:"20%"}} onChange={(e)=>{
-                    if(e.target.value === "-1"){
-                      setCard(dataCardTree()[0]);
-                      setHistory([]);
-                      
-                    }else{
-                      setCard((prevCard:CardTree)=>{
-                        const newCard = dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined)[Number(e.target.value)];
-                        newCard.prevCard = prevCard;
-                        prevCard.indexSelectedAnswer=undefined;
-                        setHistory((history:CardTree[])=>{
-                          history.push(prevCard);
-                          // let pp = history.filter( (ele, ind) => ind === history.findIndex( elem => elem.id === ele.id && elem.id === ele.id))
-                          return history;
-                        });
-                        return newCard;
-                      })
-                    }
-                    setSelectValue(e.target.value);
-                    }}>
-                    <option key="-1" value="-1"></option>
-                    {dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined).map((item:CardTree,index:number)=>{
-                      return <option key={index} value={index.toString()}>{item.questionText}</option>
-                    })}
-                  </select>
-              </div>
+              {/* search bar */}
+              <SearchBar selectValue={selectValue} setSelectValue={setSelectValue} setCard={setCard} setHistory={setHistory}/>
               {/* history page  */}
               {isHistoryActive && <History setIsHistoryActive={setIsHistoryActive} history={history} setHistory={setHistory} setCard={setCard} />}
               {!isHistoryActive && card.nextCards!==undefined && 
@@ -70,7 +43,7 @@ const MainPage: React.FC<IProps> = ({selectValue,setSelectValue,card,setHistory,
                         <h2>{card.questionText}</h2>
                     </div>
                   {getAnswersArr().map((answer,index)=>{
-                    return <Answer setHistory={setHistory} answer={answer} index={index} key={index} setCard={setCard}/>
+                    return <Answer card={card} setHistory={setHistory} answer={answer} index={index} key={index} setCard={setCard}/>
                   })}
                 </div>}   
               {/* TheFinalAnswerPage is here for the styling */}

@@ -1,7 +1,9 @@
 /* the search box */
   .Search{
     position: relative;
-    width:100%;
+    margin-right: 25%;
+    width:50%;
+    /* background-color: violet; */
   }
   /* .searchBox{
     margin-top: 2.5%;
@@ -9,8 +11,98 @@
   } */
   /* .searchBoxtitle{
     float: right;
-    margin-right: 32%;
+    
   } */
+  .searchInputs{
+    display: flex;
+  }
+  .Search input{
+    background-color:white;
+    border: 0;
+    border-radius: 0px;
+    font-size: 14px;
+    padding: 3%;
+    width: 100%;
+  }
+  .searchIcon{
+    width:10%;
+    background-color: white;
+    display: grid;
+    place-items: center;
+  }
+  input:focus{
+    outline: none;
+  }
+  .searchIcon svg{
+    font-size: 105%;
+  }
+  .dataResult {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  
+  .dataResult::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .dataResult .dataItem {
+    position:relative;
+    min-height: auto;
+    padding: 2%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: black;
+  }
+  
+  .dataItem p {
+    margin-left: 10px;
+  }
+  a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    background-color: lightgrey;
+  }
+  #clearButton{
+    cursor: pointer;
+  }
+/* .dataResult{
+  width:100%;
+  height:30%;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.dataResult::-webkit-scrollbar{
+  display: none;
+}
+
+.dataResult .dataItem{
+  width:100%;
+  height:100%;
+  display: flex;
+  align-items: center;
+  color:black;
+  border:2px solid black;
+}
+
+.dataItem p{
+  margin-right: 1%;
+  cursor:pointer;
+}
+
+p:hover{
+  background-color: lightgray;
+} */
   /* the main area of the questions and anwers */
   .TheQuestionPage{
     position: relative;
@@ -53,7 +145,8 @@
   /* the common questions area */
   .commonAnswers{
     position: relative;
-    margin-top: 16%;
+    margin-top: 15%;
+    bottom: 0px;
     margin-left: auto;
     margin-right: auto;
     width: 80%;
@@ -75,5 +168,8 @@
   .answerObj:hover{
     background-color: #5a4dff;
     color: #ffffff;
+    border: 2px solid #5a4dff;
+  }
+  .wasSelected{
     border: 2px solid #5a4dff;
   }
