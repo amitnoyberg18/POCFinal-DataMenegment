@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef } from "react";
 // import CardQuestionnaire from "../classes/cardQuestion"
 import { CardTree } from "../../models/cardTree";
+import {CSSTransition,TransitionGroup} from 'react-transition-group';
+
 
 
 interface IProps{
@@ -59,10 +61,19 @@ const Answer: React.FC<IProps> = ({card,answer,setCard,index,setHistory}) => {
     },[handleKeyPress])
     
     return ( 
-        <div ref={inputRef} id={index.toString()} onClick={onSelectAnswer} className="answer">
-            <p style={{float:"right",marginRight:"10%"}}>({index+1})</p>
-            <p style={{marginLeft:"10%"}}>{answer}</p>
-        </div>
+        // <TransitionGroup className="answer-container">
+        //     <CSSTransition
+        //         key={card.id}
+        //         timeout={1000}
+        //         classNames="fade"
+        //     >
+                <div ref={inputRef} id={index.toString()} onClick={onSelectAnswer} className="answer">
+                    <p style={{float:"right",marginRight:"10%"}}>({index+1})</p>
+                    <p style={{marginLeft:"10%"}}>{answer}</p>
+                </div>
+        //     </CSSTransition>
+        // </ TransitionGroup>
+
      );
 }
  

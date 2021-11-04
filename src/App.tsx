@@ -7,6 +7,8 @@ import MainPage from './Pages/MainPage/MainPage';
 import historyPng from "../src/icons/history.png";
 import HomePng from "../src/icons/backHomePage.png";
 import BackPng from "./icons/back.png";
+import {CSSTransition} from 'react-transition-group';
+
 
 interface Istate{
   cardTreeObj :CardTree;
@@ -101,7 +103,16 @@ function App() {
 
   return (
     <div className="App">
-      {isFirstPageActive &&<FirstPage setCard={setCard} setIsFirstPageActive={setIsFirstPageActive}/>}
+      {isFirstPageActive &&
+      
+      <CSSTransition
+        in={isFirstPageActive}
+        appear = {true}
+        timeout = {1600}
+        classNames ="fade"
+        >      
+          <FirstPage setCard={setCard} setIsFirstPageActive={setIsFirstPageActive}/>
+        </CSSTransition>}
       {!isFirstPageActive &&
       <div className="page">
         <div className="buttons">
