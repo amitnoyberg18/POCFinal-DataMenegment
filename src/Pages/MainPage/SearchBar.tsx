@@ -43,7 +43,7 @@ const SearchBar:React.FC<IProps> = ({selectValue,setSelectValue,setHistory,setCa
     //         </div>)
     const [data,setData] = useState(()=>dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined));
     const [filterData,setFilterData]=useState<CardTree[]>([]);
-    const [value,setValue] = useState<string>("") 
+    const [value,setValue] = useState<string>("");
 
 
     const handleFilter = (e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -69,7 +69,7 @@ const SearchBar:React.FC<IProps> = ({selectValue,setSelectValue,setHistory,setCa
         <div className="dataResult">
             {filterData.slice(0,5).map((item:CardTree,index:number)=>{
                     // return <option key={index} value={index.toString()}>{item.questionText}</option>
-                    return <a key={index} className="dataItem" onClick={()=>{
+                    return <a href="/#" key={index} className="dataItem" onClick={()=>{
                         setFilterData([]);
                         setCard((prevCard:CardTree)=>{
                             item.prevCard=prevCard;

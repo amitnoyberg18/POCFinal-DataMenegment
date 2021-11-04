@@ -145,7 +145,8 @@ p:hover{
   /* the common questions area */
   .commonAnswers{
     position: relative;
-    margin-top: 12%;
+    margin-top: 15%;
+    bottom: 0px;
     margin-left: auto;
     margin-right: auto;
     width: 80%;
