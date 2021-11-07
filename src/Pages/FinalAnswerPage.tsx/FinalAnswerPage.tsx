@@ -7,7 +7,7 @@ import { setTimeout } from "timers";
 
 interface IProps{
     // cardQuestionnaire: CardQuestionnaire<string>;
-    theWayToSolve: string;
+    theWayToSolve?: string;
     crmDetails:string[];
     setCard: Function;
     setHistory:Function;
@@ -23,10 +23,12 @@ const FinalAnswerPage: React.FC<IProps> = ({setSelectValue,theWayToSolve,crmDeta
 
 
     const copyPasteAnswer =()=>{
-        navigator.clipboard.writeText(theWayToSolve);
+        if(theWayToSolve !== undefined){
+            navigator.clipboard.writeText(theWayToSolve);
             setIsCopy(!isCopy)
         if(isCopy){
             setTimeout(()=>copyPasteAnswer(), 3000);
+        }
         }
 
         //שארי כמה שניות ישתנה לתמונה האחרת

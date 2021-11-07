@@ -6,16 +6,14 @@ interface IProps{
     card:CardTree;
     index:number;
     setCard:Function;//this will come from app or i will use a router
-    setIsFirstPageActive:Function;
 }
-const InCargeSelection: React.FC<IProps> = ({card,index,setCard,setIsFirstPageActive}) => {
+const InCargeSelection: React.FC<IProps> = ({card,index,setCard}) => {
     //the next function shows the card that the in charge selected
 
 
     const onSelectAnswer = useCallback(()=>{
         setCard(card)
-        setIsFirstPageActive(false);
-    },[card,setIsFirstPageActive,setCard])
+    },[card,,setCard])
 
 
 

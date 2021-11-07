@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import FirstPage from './Pages/FirstPage/FirstPage';
+// import FirstPage from './Pages/FirstPage/FirstPage';
 import {dataCardTree} from "./data/data";
 import {CardTree} from './models/cardTree';
 import MainPage from './Pages/MainPage/MainPage';
@@ -10,21 +10,24 @@ import BackPng from "./icons/back.png";
 import {CSSTransition} from 'react-transition-group';
 
 
-interface Istate{
-  cardTreeObj :CardTree;
-  history:CardTree[];
+interface IProps{
+  setCard: Function;
+  card?:CardTree;
 }
 
-function App() {
-  const [isFirstPageActive,setIsFirstPageActive] = useState(true);
+const App: React.FC<IProps>=({setCard,card}) =>{
   const [isHistoryActive,setIsHistoryActive] = useState(false);
   const [selectValue,setSelectValue] = useState("");
-  const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
-    const newCard = dataCardTree()[0];
-    return newCard;
-  });
-  const [history,setHistory] = useState<Istate["history"]>([]);
-  
+  // const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
+  //   const newCard = dataCardTree()[0];
+  //   return newCard;
+  // });
+  const [history,setHistory] = useState<CardTree[]>([]);
+  //Fetching data
+
+  useEffect(()=>{
+    setCard(dataCardTree()[0]);
+  },[setCard])
   //THE BACK FUNCTION AND KEY HANDLE
   
   const backToPrevCard = ()=>{
@@ -39,7 +42,6 @@ function App() {
           })     
           return theCard.prevCard            
         }
-        setIsFirstPageActive(true);
         setIsHistoryActive(false);
         // setHistory([]);
         setSelectValue("-1");
@@ -103,17 +105,15 @@ function App() {
 
   return (
     <div className="App">
-      {isFirstPageActive &&
       
-      <CSSTransition
+      {/* <CSSTransition
         in={isFirstPageActive}
         appear = {true}
         timeout = {1600}
         classNames ="fade"
         >      
           <FirstPage setCard={setCard} setIsFirstPageActive={setIsFirstPageActive}/>
-        </CSSTransition>}
-      {!isFirstPageActive &&
+        </CSSTransition> */}
       <div className="page">
         <div className="buttons">
           {/* <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}>&#x21B6;</button> */}
@@ -121,7 +121,6 @@ function App() {
           <button className="Home" onClick={()=>{
             setCard(dataCardTree()[0]);
             setHistory([]);
-            setIsFirstPageActive(true);
             setSelectValue("-1");
             setIsHistoryActive(false);
           }}><img src={HomePng} style={{width:"25px"}} alt="Home"></img></button>
@@ -132,7 +131,7 @@ function App() {
         <MainPage selectValue={selectValue} setSelectValue={setSelectValue} isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
       </div>
       
-      }
+      
     </div>
   );
 }
