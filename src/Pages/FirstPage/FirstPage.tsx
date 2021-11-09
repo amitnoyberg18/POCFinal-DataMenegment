@@ -6,7 +6,7 @@ import { CardTree } from "../../models/cardTree";
 import compass from "../../icons/compass.png";
 // import App from "../../App";
 import { Link } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
+// import { CSSTransition } from "react-transition-group";
 
 
 

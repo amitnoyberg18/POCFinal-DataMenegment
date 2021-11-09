@@ -70,7 +70,8 @@ const SearchBar:React.FC<IProps> = ({setHistory,setCard})=>{
         <div className="dataResult">
             {filterData.slice(0,5).map((item:CardTree,index:number)=>{
                     // return <option key={index} value={index.toString()}>{item.questionText}</option>
-                    return <a href="/#" key={index} className="dataItem" onClick={()=>{
+                    // return <a href="/#" key={index} className="dataItem" onClick={()=>{
+                        return <a href="/" key={index} className="dataItem" onClick={()=>{
                         setFilterData([]);
                         setCard((prevCard:CardTree)=>{
                             item.prevCard=prevCard;

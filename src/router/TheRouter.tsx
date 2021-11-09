@@ -7,6 +7,7 @@ import App from "../App";
 const TheRouter = () =>{
     return <Router>
         <Switch>
+            <Route path = "/#" />
             <Route path = "/" element={<FirstPage/>}/>
             <Route path = "/mainApp" element = {<App/>}/>
             <Route path = "/mainApp/:questionID" element = {<App />}/> 
