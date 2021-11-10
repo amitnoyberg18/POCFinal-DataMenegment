@@ -1,54 +1,62 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
-import FirstPage from './Pages/FirstPage/FirstPage';
+// import FirstPage from './Pages/FirstPage/FirstPage';
 import {dataCardTree} from "./data/data";
 import {CardTree} from './models/cardTree';
 import MainPage from './Pages/MainPage/MainPage';
 import historyPng from "../src/icons/history.png";
 import HomePng from "../src/icons/backHomePage.png";
 import BackPng from "./icons/back.png";
-import {CSSTransition} from 'react-transition-group';
+// import {CSSTransition} from 'react-transition-group';
+import { Link } from "react-router-dom";
+
 
 
 interface Istate{
-  cardTreeObj :CardTree;
-  history:CardTree[];
+  cardTreeObj: CardTree;
 }
 
-function App() {
-  const [isFirstPageActive,setIsFirstPageActive] = useState(true);
-  const [isHistoryActive,setIsHistoryActive] = useState(false);
-  const [selectValue,setSelectValue] = useState("");
-  const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
+const App = () =>{
+  const [card,setCard]=useState<Istate["cardTreeObj"]>(
+    ()=>{
     const newCard = dataCardTree()[0];
     return newCard;
-  });
-  const [history,setHistory] = useState<Istate["history"]>([]);
-  
+  });  
+  const [isHistoryActive,setIsHistoryActive] = useState(false);
+  // const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
+  //   const newCard = dataCardTree()[0];
+  //   return newCard;
+  // });
+  const [history,setHistory] = useState<CardTree[]>([]);
+  //Fetching data
+
+
+  // We need to add here a useEffect that will check if there are params
+
+
   //THE BACK FUNCTION AND KEY HANDLE
   
-  const backToPrevCard = ()=>{
-    setTimeout(() => {
+  const backToPrevCard = useCallback(()=>{
+    // setTimeout(() => {
       setCard((theCard : CardTree )=>{
         
         if(theCard?.prevCard!==undefined){   
            setHistory((prevHistory)=>{
             prevHistory.pop()
+            console.log(prevHistory);
             // prevHistory.filter( (ele, ind) => ind === prevHistory.findIndex( elem => elem.id === ele.id && elem.id === ele.id))
             return prevHistory;
           })     
           return theCard.prevCard            
         }
-        setIsFirstPageActive(true);
         setIsHistoryActive(false);
         // setHistory([]);
-        setSelectValue("-1");
         return theCard        
         })
-    }, 0);
+    // }, 0);
 
     
-  }
+  },[setCard,setHistory])
   useEffect(()=>{
     const handleKeyPress = (e:any) => {
         if(e.keyCode !== undefined){
@@ -97,42 +105,29 @@ function App() {
             handleKeyPress(e);
         })
     }
-},[])
+},[backToPrevCard])
 
   // THE APP
 
   return (
     <div className="App">
-      {isFirstPageActive &&
-      
-      <CSSTransition
-        in={isFirstPageActive}
-        appear = {true}
-        timeout = {1600}
-        classNames ="fade"
-        >      
-          <FirstPage setCard={setCard} setIsFirstPageActive={setIsFirstPageActive}/>
-        </CSSTransition>}
-      {!isFirstPageActive &&
       <div className="page">
         <div className="buttons">
           {/* <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}>&#x21B6;</button> */}
           <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}><img src={BackPng} style={{width:"25px"}} alt="Home"></img></button>
-          <button className="Home" onClick={()=>{
-            setCard(dataCardTree()[0]);
-            setHistory([]);
-            setIsFirstPageActive(true);
-            setSelectValue("-1");
-            setIsHistoryActive(false);
-          }}><img src={HomePng} style={{width:"25px"}} alt="Home"></img></button>
+          <Link to='/'>
+            <button className="Home" onClick={()=>{
+              setCard(dataCardTree()[0]);
+              setHistory([]);
+              setIsHistoryActive(false);
+            }}><img src={HomePng} style={{width:"25px"}} alt="Home"></img></button>
+          </Link>
           <button onClick={()=>setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)} className="History"><img style={{width:"25px"}} src={historyPng} alt="history" /></button>
           
           </div>
           {/* the MainPage has the FinalAnswerPage */}
-        <MainPage selectValue={selectValue} setSelectValue={setSelectValue} isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
-      </div>
-      
-      }
+        <MainPage isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
+      </div>     
     </div>
   );
 }

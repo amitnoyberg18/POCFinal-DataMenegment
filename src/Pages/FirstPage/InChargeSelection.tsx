@@ -1,21 +1,19 @@
 import React, { useCallback, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { CardTree } from "../../models/cardTree";
 
 
 interface IProps{
     card:CardTree;
     index:number;
-    setCard:Function;//this will come from app or i will use a router
-    setIsFirstPageActive:Function;
 }
-const InCargeSelection: React.FC<IProps> = ({card,index,setCard,setIsFirstPageActive}) => {
+const InCargeSelection: React.FC<IProps> = ({card,index}) => {
     //the next function shows the card that the in charge selected
 
 
-    const onSelectAnswer = useCallback(()=>{
-        setCard(card)
-        setIsFirstPageActive(false);
-    },[card,setIsFirstPageActive,setCard])
+    // const onSelectAnswer = useCallback(()=>{
+    //     setCard(card)
+    // },[card,setCard])
 
 
 
@@ -25,9 +23,10 @@ const InCargeSelection: React.FC<IProps> = ({card,index,setCard,setIsFirstPageAc
     const  handleKeyPress =  useCallback((e) => {
 
             if(e.code === 'Digit'+(index+1)){
-                onSelectAnswer();
+                console.log(`/mainPage/:${card.id}`)
+                //move the a params url
             }
-      }, [index,onSelectAnswer]);
+      }, [index,card]);
     
     
     //in the use effect you added a listener to the keypress
@@ -40,10 +39,12 @@ const InCargeSelection: React.FC<IProps> = ({card,index,setCard,setIsFirstPageAc
     
 
     return ( 
-        <div id={index.toString()} onClick={onSelectAnswer} className="InchargeSelectedCard">
-            <p style={{float:"right",marginRight:"10%"}}>({index+1})</p>
-            <p style={{marginLeft:"10%"}}>{card.questionText}</p>
-        </div>
+        <Link to = {`/mainPage/:${card.id}`}>
+            <div id={index.toString()} className="InchargeSelectedCard">
+                <p style={{float:"right",marginRight:"10%"}}>({index+1})</p>
+                <p style={{marginLeft:"10%"}}>{card.questionText}</p>
+            </div>
+        </Link>
      );
 }
  

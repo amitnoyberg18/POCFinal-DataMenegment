@@ -11,9 +11,7 @@ import "./MainPage.css";
 // import { isTemplateSpan } from "typescript";
 
 interface IProps{
-    selectValue:string;
-    setSelectValue:Function;
-    card:CardTree;
+    card?:CardTree;
     isHistoryActive:boolean;
     history:CardTree[];
     setCard:Function;
@@ -21,7 +19,7 @@ interface IProps{
     setIsHistoryActive:Function;
 
 }
-const MainPage: React.FC<IProps> = ({selectValue,setSelectValue,card,setHistory,setCard,history,isHistoryActive,setIsHistoryActive})=>{
+const MainPage: React.FC<IProps> = ({card,setHistory,setCard,history,isHistoryActive,setIsHistoryActive})=>{
     const getAnswersArr =()=>{
         if(card?.answers!==undefined)
           return card.answers
@@ -34,10 +32,10 @@ const MainPage: React.FC<IProps> = ({selectValue,setSelectValue,card,setHistory,
 
           <div className="TheQuestionPage">
               {/* search bar */}
-              <SearchBar selectValue={selectValue} setSelectValue={setSelectValue} setCard={setCard} setHistory={setHistory}/>
+              <SearchBar setCard={setCard} setHistory={setHistory}/>
               {/* history page  */}
               {isHistoryActive && <History setIsHistoryActive={setIsHistoryActive} history={history} setHistory={setHistory} setCard={setCard} />}
-              {!isHistoryActive && card.nextCards!==undefined && 
+              {!isHistoryActive && card?.nextCards!==undefined && 
                 <div className="card">
                     <div className="question">
                         <h2>{card.questionText}</h2>
@@ -47,9 +45,9 @@ const MainPage: React.FC<IProps> = ({selectValue,setSelectValue,card,setHistory,
                   })}
                 </div>}   
               {/* TheFinalAnswerPage is here for the styling */}
-              {!isHistoryActive && card.nextCards === undefined  &&<FinalAnswerPage setSelectValue={setSelectValue} setHistory={setHistory} theWayToSolve={card.questionText} crmDetails={getAnswersArr()} setCard={setCard}/>}     
+              {!isHistoryActive && card?.nextCards === undefined  &&<FinalAnswerPage setHistory={setHistory} theWayToSolve={card?.questionText} crmDetails={getAnswersArr()} setCard={setCard}/>}     
           </div>
-          {!isHistoryActive && card.nextCards!==undefined &&<div className="commonAnswers">
+          {!isHistoryActive && card?.nextCards!==undefined &&<div className="commonAnswers">
             <hr />
               <h1>תשובות נפוצות</h1>
 

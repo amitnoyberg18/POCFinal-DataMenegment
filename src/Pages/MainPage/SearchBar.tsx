@@ -1,16 +1,14 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { CardTree } from "../../models/cardTree";
 import {dataCardTree} from "../../data/data";
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
 interface IProps{
-    selectValue:string;
-    setSelectValue:Function;
     setCard:Function;
     setHistory:Function;
 }
 
-const SearchBar:React.FC<IProps> = ({selectValue,setSelectValue,setHistory,setCard})=>{
+const SearchBar:React.FC<IProps> = ({setHistory,setCard})=>{
     
     // return <div className="Search">
     //             <label className="searchBoxtitle">חיפוש תשובות סופיות:</label>
@@ -41,10 +39,13 @@ const SearchBar:React.FC<IProps> = ({selectValue,setSelectValue,setHistory,setCa
     //             })}
     //             </select>
     //         </div>)
-    const [data,setData] = useState(()=>dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined));
+    const [data,setData] = useState<CardTree[]>([]);
     const [filterData,setFilterData]=useState<CardTree[]>([]);
     const [value,setValue] = useState<string>("");
 
+    useEffect(()=>{
+        setData(dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined))
+    },[setData])
 
     const handleFilter = (e:React.ChangeEvent<HTMLInputElement>)=>{
         
@@ -69,7 +70,8 @@ const SearchBar:React.FC<IProps> = ({selectValue,setSelectValue,setHistory,setCa
         <div className="dataResult">
             {filterData.slice(0,5).map((item:CardTree,index:number)=>{
                     // return <option key={index} value={index.toString()}>{item.questionText}</option>
-                    return <a href="/#" key={index} className="dataItem" onClick={()=>{
+                    // return <a href="/#" key={index} className="dataItem" onClick={()=>{
+                        return <a href="/" key={index} className="dataItem" onClick={()=>{
                         setFilterData([]);
                         setCard((prevCard:CardTree)=>{
                             item.prevCard=prevCard;

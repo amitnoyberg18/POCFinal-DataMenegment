@@ -7,13 +7,12 @@ import { setTimeout } from "timers";
 
 interface IProps{
     // cardQuestionnaire: CardQuestionnaire<string>;
-    theWayToSolve: string;
+    theWayToSolve?: string;
     crmDetails:string[];
     setCard: Function;
     setHistory:Function;
-    setSelectValue:Function;
 }
-const FinalAnswerPage: React.FC<IProps> = ({setSelectValue,theWayToSolve,crmDetails,setCard,setHistory}) => {
+const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,setHistory}) => {
     
      const [isCopy,setIsCopy]=useState<boolean>(false)
      
@@ -23,20 +22,21 @@ const FinalAnswerPage: React.FC<IProps> = ({setSelectValue,theWayToSolve,crmDeta
 
 
     const copyPasteAnswer =()=>{
-        navigator.clipboard.writeText(theWayToSolve);
-            setIsCopy(!isCopy)
-        if(isCopy){
-            setTimeout(()=>copyPasteAnswer(), 3000);
+        if(theWayToSolve !== undefined){
+            navigator.clipboard.writeText(theWayToSolve);
+            setIsCopy((prevIsCopy)=>!prevIsCopy)
+            if(isCopy){
+                setTimeout(()=>copyPasteAnswer(), 3000);
+            }
         }
-
         //שארי כמה שניות ישתנה לתמונה האחרת
     }
     const inputRef=useRef<HTMLButtonElement>(null);
 
 
-    const copyPasteImgFun=()=>{
-        return copyPasteimg;
-    }
+    // const copyPasteImgFun=()=>{
+    //     return copyPasteimg;
+    // }
 
 
     return (    
@@ -56,7 +56,7 @@ const FinalAnswerPage: React.FC<IProps> = ({setSelectValue,theWayToSolve,crmDeta
                         
                         </h2>
                         <button onClick={copyPasteAnswer}>
-                            <img src={isCopy ? copySuccessImg : copyPasteimg} style={{width:"20px",height:"18px"}} ></img>
+                            <img alt="copyImg" src={isCopy ? copySuccessImg : copyPasteimg} style={{width:"20px",height:"18px"}} ></img>
                             </button>
 
                       
@@ -67,7 +67,6 @@ const FinalAnswerPage: React.FC<IProps> = ({setSelectValue,theWayToSolve,crmDeta
                         {
                             setCard(()=>dataCardTree()[0]);
                             setHistory([]);
-                            setSelectValue("-1");
                         }}
                         >חזרה לתחילת השאלון</button>
                 </div>

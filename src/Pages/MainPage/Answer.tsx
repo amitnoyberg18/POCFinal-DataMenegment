@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 // import CardQuestionnaire from "../classes/cardQuestion"
 import { CardTree } from "../../models/cardTree";
-import {CSSTransition,TransitionGroup} from 'react-transition-group';
+// import {CSSTransition,TransitionGroup} from 'react-transition-group';
 
 
 

@@ -1,10 +1,11 @@
+import { FinalAnswerCard } from "./FinalAnswerCard";
 
 export type CardTree ={ 
     id:number;
     questionText:string;
     answers ? :string[];
     prevCard ? :CardTree;
-    nextCards ? :CardTree[];
+    nextCards ? :CardTree[] | FinalAnswerCard[];
     indexSelectedAnswer ?:number;
     clicked:number;
 }
