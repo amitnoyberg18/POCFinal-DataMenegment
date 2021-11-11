@@ -1,0 +1,47 @@
+.SignIn{
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: white;
+    width:40%;
+    padding: 3%;
+    font-size:x-large;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin: auto;
+    margin-top: 10%;
+    border: 2px solid black;
+}
+input{
+    position: relative;
+    display: block;
+    font-size: 80%;
+    padding: 3%;
+    width: 100%;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+input:focus {
+    border: 3px solid #555;
+}
+label{
+    float: right;
+}
+
+.btnSubmit{
+    margin-top: 5%;
+    background-color: white;
+    color: black;
+    vertical-align: middle;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    width: 40%;
+    padding: 2%;
+    transition: background-color 1s,color 1s;
+}
+.btnSubmit:hover{
+    background-color: lightgray;
+    border: 2px solid black;
+}

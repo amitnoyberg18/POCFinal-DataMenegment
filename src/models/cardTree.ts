@@ -1,17 +1,31 @@
-import { FinalAnswerCard } from "./FinalAnswerCard";
 
-export type CardTree ={ 
+// export type Card ={
+//     id: number;
+//     prevCard?: CardTree| FinalAnswerCard;
+// }
+
+export type CardTree =  { 
     id: number;
+    prevCard?: CardTree;
     questionText: string;
     answers?: string[];
-    prevCard?: CardTree;
-    nextCards?: CardTree[] | FinalAnswerCard[];
+    // nextCards?: (CardTree | FinalAnswerCard)[];
+    nextCards?: CardTree[];
     indexSelectedAnswer?: number;
     clicked: number;
     InCargeSelcted: boolean;
 }
-
-
+//read about brand in typescript
+// type Brand<T, Brand extends string> = T & Brand
+// type Dollar = Brand<number, 'Dollar'>
+// type Euro = Brand<number, 'Euro'>
+// export type FinalAnswerCard  =  Card & { 
+//     field:string;
+//     subField:string;
+//     question:string;
+//     subQuestion:string;
+//     solution:string;
+// }
 // export const CardTreeFunction = {
 //     setAnswers : (answers:string[],newAnswers:string[])=>{
 //         answers = answers?.concat(...newAnswers);

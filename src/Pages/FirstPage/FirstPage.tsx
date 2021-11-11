@@ -28,11 +28,15 @@ const FirstPage=()=>{
                 timeout = {1600}
                 classNames ="fade"
                 >    */}
-                {inCargeSelection !== undefined &&<div> 
-                    <img id="compass" src={compass} alt="compass"/>
-                    <h1>ברוך הבא למערכת לניהול ידע</h1>
+                <img id="compass" src={compass} alt="compass"/>
+                <h1>ברוך הבא למערכת לניהול ידע</h1>
+                {inCargeSelection !== undefined &&
+                <div> 
                     <Link to="/mainApp">
-                        <button className="btnStart" >היכנס לאפליקציה</button>
+                        <button style={{ marginLeft: '2%'}} className="btnStart" >היכנס לאפליקציה</button>
+                    </Link>
+                    <Link to="/ManagePage">
+                        <button className="btnStart" >היכנס לניהול</button>
                     </Link>
                     <div className="InCargeSelection">
                         <hr />
