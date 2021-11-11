@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 import { CardTree } from "../../models/cardTree";
-import {dataCardTree} from "../../data/data";
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
+import Axios from '../../customHook/Axios';
+
+
 interface IProps{
     setCard:Function;
     setHistory:Function;
@@ -43,12 +45,21 @@ const SearchBar:React.FC<IProps> = ({setHistory,setCard})=>{
     const [filterData,setFilterData]=useState<CardTree[]>([]);
     const [value,setValue] = useState<string>("");
 
+
     useEffect(()=>{
-        setData(dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined))
+        const arr:CardTree[] = [] 
+        // setData(dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined))
+        Axios(setData,`http://localhost:8000/api/Answers`)
+        for (let index = 0; index < data.length; index++) {
+            const element:CardTree = data[index]; 
+            arr.push(element);     
+        }
+        console.log(arr);
+        setData(arr);
     },[setData])
 
     const handleFilter = (e:React.ChangeEvent<HTMLInputElement>)=>{
-        
+        console.log(data);
         const newFilter = data.filter((item:CardTree)=>{
             return item.questionText.includes(e.target.value);
         });
@@ -71,7 +82,7 @@ const SearchBar:React.FC<IProps> = ({setHistory,setCard})=>{
             {filterData.slice(0,5).map((item:CardTree,index:number)=>{
                     // return <option key={index} value={index.toString()}>{item.questionText}</option>
                     // return <a href="/#" key={index} className="dataItem" onClick={()=>{
-                        return <a href="/" key={index} className="dataItem" onClick={()=>{
+                        return <p key={index} className="dataItem" onClick={()=>{
                         setFilterData([]);
                         setCard((prevCard:CardTree)=>{
                             item.prevCard=prevCard;
@@ -88,7 +99,7 @@ const SearchBar:React.FC<IProps> = ({setHistory,setCard})=>{
                             return item;
                         });
                         setValue("");
-                    }}>{item.questionText}</a>
+                    }}>{item.questionText}</p>
                  })}
         </div>
 }

@@ -23,7 +23,7 @@ const InCargeSelection: React.FC<IProps> = ({card,index}) => {
     const  handleKeyPress =  useCallback((e) => {
 
             if(e.code === 'Digit'+(index+1)){
-                console.log(`/mainPage/:${card.id}`)
+                window.location.href = `/mainApp/${card.id}`;
                 //move the a params url
             }
       }, [index,card]);
@@ -39,7 +39,7 @@ const InCargeSelection: React.FC<IProps> = ({card,index}) => {
     
 
     return ( 
-        <Link to = {`/mainPage/:${card.id}`}>
+        <Link to={`/mainApp/${card.id}`}>
             <div id={index.toString()} className="InchargeSelectedCard">
                 <p style={{float:"right",marginRight:"10%"}}>({index+1})</p>
                 <p style={{marginLeft:"10%"}}>{card.questionText}</p>

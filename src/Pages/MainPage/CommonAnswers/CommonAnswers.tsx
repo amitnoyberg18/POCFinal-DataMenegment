@@ -6,9 +6,12 @@ interface IProps{
     card:CardTree;
     setCard:Function;
     setHistory:Function;
+    data:CardTree[];
 }
 
-const CommonAnswers: React.FC<IProps>=({card,setCard,setHistory})=>{
+const CommonAnswers: React.FC<IProps>=({card,setCard,setHistory,data})=>{
+  
+
     return (
       <div className="answerObj" onClick={()=>{
           setCard((prevCard:CardTree)=>{

@@ -1,14 +1,17 @@
 import { FinalAnswerCard } from "./FinalAnswerCard";
 
 export type CardTree ={ 
-    id:number;
-    questionText:string;
-    answers ? :string[];
-    prevCard ? :CardTree;
-    nextCards ? :CardTree[] | FinalAnswerCard[];
-    indexSelectedAnswer ?:number;
-    clicked:number;
+    id: number;
+    questionText: string;
+    answers?: string[];
+    prevCard?: CardTree;
+    nextCards?: CardTree[] | FinalAnswerCard[];
+    indexSelectedAnswer?: number;
+    clicked: number;
+    InCargeSelcted: boolean;
 }
+
+
 // export const CardTreeFunction = {
 //     setAnswers : (answers:string[],newAnswers:string[])=>{
 //         answers = answers?.concat(...newAnswers);

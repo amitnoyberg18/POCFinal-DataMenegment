@@ -1,9 +1,11 @@
 import React, {useState, useEffect, useRef } from "react";
 import "./FinalAnswerPage.css";
-import {dataCardTree} from "../../data/data"
 import copyPasteimg from '../../icons/copy.jpg'
 import copySuccessImg from '../../icons/checkIcon.png'
 import { setTimeout } from "timers";
+import { CardTree } from "../../models/cardTree";
+import { Link } from "react-router-dom";
+
 
 interface IProps{
     // cardQuestionnaire: CardQuestionnaire<string>;
@@ -11,8 +13,9 @@ interface IProps{
     crmDetails:string[];
     setCard: Function;
     setHistory:Function;
+    firstCard:CardTree | undefined
 }
-const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,setHistory}) => {
+const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,setHistory,firstCard}) => {
     
      const [isCopy,setIsCopy]=useState<boolean>(false)
      
@@ -62,13 +65,16 @@ const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,set
                       
                 </div>
                 <div className="backbutton">
+                <Link to='/mainApp'>
                     <button ref={inputRef} className="backToStart" 
                     onClick={()=>
                         {
-                            setCard(()=>dataCardTree()[0]);
+                            setCard(()=>firstCard);
                             setHistory([]);
                         }}
                         >חזרה לתחילת השאלון</button>
+                </Link>
+
                 </div>
 
         </div>
