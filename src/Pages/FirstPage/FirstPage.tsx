@@ -16,7 +16,6 @@ interface Istate{
 
 const FirstPage=()=>{
     const [inCargeSelection,setInCargeSelection] = useState<Istate["cardTreeArray"]>([]);
-    console.log(inCargeSelection);
 
     useEffect(()=>{
         Axios(setInCargeSelection,'http://localhost:8000/api/InchargeSelected');

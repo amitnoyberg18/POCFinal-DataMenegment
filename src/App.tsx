@@ -7,7 +7,7 @@ import historyPng from "../src/icons/history.png";
 import HomePng from "../src/icons/backHomePage.png";
 import BackPng from "./icons/back.png";
 // import {CSSTransition} from 'react-transition-group';
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import Axios from './customHook/Axios'
 
 
@@ -17,6 +17,7 @@ interface Istate{
 }
 
 const App = () =>{
+  const { CardId } = useParams() 
   const [firstCard,setFirstCard] = useState<Istate["cardTreeObj"]>();
   const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
     const c1: CardTree = {id:0,questionText:"0",answers:[ "0"],clicked:0,InCargeSelcted:false}
@@ -30,9 +31,15 @@ const App = () =>{
   const [history,setHistory] = useState<CardTree[]>([]);
   //Fetching data
   useEffect(()=>{
-    Axios(setCard,'http://localhost:8000/api/');
-    Axios(setFirstCard,'http://localhost:8000/api/');
-},[])
+    console.log(CardId);
+    if(CardId){
+      Axios(setCard,`http://localhost:8000/api/TheCard/${CardId}`);
+      Axios(setFirstCard,`http://localhost:8000/api/TheCard/${CardId}`);
+    }else{
+      Axios(setCard,'http://localhost:8000/api/');
+      Axios(setFirstCard,'http://localhost:8000/api/');
+    }
+},[CardId])
 
   // We need to add here a useEffect that will check if there are params
 
