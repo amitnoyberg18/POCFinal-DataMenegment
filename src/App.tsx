@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 // import FirstPage from './Pages/FirstPage/FirstPage';
-import {dataCardTree} from "./data/data";
 import {CardTree} from './models/cardTree';
 import MainPage from './Pages/MainPage/MainPage';
 import historyPng from "../src/icons/history.png";
@@ -9,6 +8,7 @@ import HomePng from "../src/icons/backHomePage.png";
 import BackPng from "./icons/back.png";
 // import {CSSTransition} from 'react-transition-group';
 import { Link } from "react-router-dom";
+import Axios from './customHook/Axios'
 
 
 
@@ -17,11 +17,11 @@ interface Istate{
 }
 
 const App = () =>{
-  const [card,setCard]=useState<Istate["cardTreeObj"]>(
-    ()=>{
-    const newCard = dataCardTree()[0];
-    return newCard;
-  });  
+  const [firstCard,setFirstCard] = useState<Istate["cardTreeObj"]>();
+  const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
+    const c1: CardTree = {id:0,questionText:"0",answers:[ "0"],clicked:0,InCargeSelcted:false}
+    return c1;
+  });
   const [isHistoryActive,setIsHistoryActive] = useState(false);
   // const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
   //   const newCard = dataCardTree()[0];
@@ -29,7 +29,10 @@ const App = () =>{
   // });
   const [history,setHistory] = useState<CardTree[]>([]);
   //Fetching data
-
+  useEffect(()=>{
+    Axios(setCard,'http://localhost:8000/api/');
+    Axios(setFirstCard,'http://localhost:8000/api/');
+},[])
 
   // We need to add here a useEffect that will check if there are params
 
@@ -117,7 +120,9 @@ const App = () =>{
           <button id="btnPrevQuesiton" className="btnPrev" onClick={backToPrevCard}><img src={BackPng} style={{width:"25px"}} alt="Home"></img></button>
           <Link to='/'>
             <button className="Home" onClick={()=>{
-              setCard(dataCardTree()[0]);
+              if(firstCard !== undefined){
+                setCard(firstCard);
+              }
               setHistory([]);
               setIsHistoryActive(false);
             }}><img src={HomePng} style={{width:"25px"}} alt="Home"></img></button>
@@ -126,7 +131,7 @@ const App = () =>{
           
           </div>
           {/* the MainPage has the FinalAnswerPage */}
-        <MainPage isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
+        <MainPage firstCard={firstCard} isHistoryActive={isHistoryActive} setIsHistoryActive={setIsHistoryActive} history={history} card={card} setCard={setCard} setHistory={setHistory}/>
       </div>     
     </div>
   );

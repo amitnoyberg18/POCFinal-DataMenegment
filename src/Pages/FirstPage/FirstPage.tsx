@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./FirstPage.css"
-import {dataCardTree} from '../../data/data';
 import InCargeSelection from "./InChargeSelection";
 import { CardTree } from "../../models/cardTree";
 import compass from "../../icons/compass.png";
 // import App from "../../App";
 import { Link } from "react-router-dom";
 // import { CSSTransition } from "react-transition-group";
-
+import Axios from '../../customHook/Axios';
 
 
 interface Istate{
     cardTreeArray:CardTree[];
 }
 
+
 const FirstPage=()=>{
-    const [inCargeSelection,setInCargeSelection] = useState<Istate["cardTreeArray"]>([])
+    const [inCargeSelection,setInCargeSelection] = useState<Istate["cardTreeArray"]>([]);
     console.log(inCargeSelection);
 
-    //fetch the inChargeData
     useEffect(()=>{
-        setInCargeSelection([dataCardTree()[0],dataCardTree()[2],dataCardTree()[4],dataCardTree()[6]]);
-    },[setInCargeSelection])
+        Axios(setInCargeSelection,'http://localhost:8000/api/InchargeSelected');
+    },[])
     return (
         <div className="FirstPage">
             {/* {<CSSTransition
@@ -30,7 +29,7 @@ const FirstPage=()=>{
                 timeout = {1600}
                 classNames ="fade"
                 >    */}
-                <div> 
+                {inCargeSelection !== undefined &&<div> 
                     <img id="compass" src={compass} alt="compass"/>
                     <h1>ברוך הבא למערכת לניהול ידע</h1>
                     <Link to="/mainApp">
@@ -43,7 +42,8 @@ const FirstPage=()=>{
                             return <InCargeSelection key={index} card={item} index={index}/>
                         })}
                 </div>
-            </div>
+            </div>}
+            {inCargeSelection === undefined && <h2>Loading...</h2>}
             {/* </CSSTransition>} */}
         </div>
     )
