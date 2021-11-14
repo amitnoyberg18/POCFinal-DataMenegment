@@ -10,7 +10,7 @@
     margin-top: 10%;
     border: 2px solid black;
 }
-input{
+.SignIn input{
     position: relative;
     display: block;
     font-size: 80%;
@@ -23,7 +23,7 @@ input{
     transition: 0.5s;
     outline: none;
 }
-input:focus {
+.SignIn input:focus {
     border: 3px solid #555;
 }
 label{
@@ -31,6 +31,7 @@ label{
 }
 
 .btnSubmit{
+    position: relative;
     margin-top: 5%;
     background-color: white;
     color: black;

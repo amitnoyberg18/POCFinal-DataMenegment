@@ -6,7 +6,7 @@ import compass from "../../icons/compass.png";
 // import App from "../../App";
 import { Link } from "react-router-dom";
 // import { CSSTransition } from "react-transition-group";
-import Axios from '../../customHook/Axios';
+import Axios from '../../customHook/useAxios';
 
 
 interface Istate{
@@ -33,10 +33,10 @@ const FirstPage=()=>{
                 {inCargeSelection !== undefined &&
                 <div> 
                     <Link to="/mainApp">
-                        <button style={{ marginLeft: '2%'}} className="btnStart" >היכנס לאפליקציה</button>
+                        <button style={{ marginRight: '4%'}} className="btnStart" >היכנס לאפליקציה</button>
                     </Link>
                     <Link to="/ManagePage">
-                        <button className="btnStart" >היכנס לניהול</button>
+                        <button style={{ marginRight: '1%'}} className="btnStart" >היכנס לניהול</button>
                     </Link>
                     <div className="InCargeSelection">
                         <hr />
