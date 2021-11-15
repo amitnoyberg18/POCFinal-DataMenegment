@@ -37,9 +37,9 @@ const MainApp=()=>{
     return (
         <div className="MainApp">
             <h1 className="header">{header}</h1>
-        <Link to='/'>
-            <button className="TheHome"><img src={HomePng} style={{width:"25px"}} alt="Home"></img></button>
-          </Link>
+                    <Link to='/'>
+                        <button className="TheHome"><img src={HomePng} style={{width:"25px"}} alt="Home"></img></button>
+                    </Link>
             <div className="navbar">
                 <ul>
                     <li id="cards"><a href="/ManagePage/MainApp/cards">כרטיסים</a></li>
@@ -48,8 +48,10 @@ const MainApp=()=>{
                 </ul>
             </div>
             <div className="TheData">
-                <DataTable url={url}/>
+                <DataTable url={url} TableName={header}/>
             </div>
+            <br />
+
         </div>
     )
 }

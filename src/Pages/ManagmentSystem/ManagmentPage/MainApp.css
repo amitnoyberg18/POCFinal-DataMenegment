@@ -3,11 +3,12 @@
     text-align: right;
 }
 /* back home button */
-button{
+.TheHome{
     position:absolute;
-    top: 3%;
-    left:1%;
-}
+    top:5%;
+    left: 3%;
+
+;}
 /* the NavBar */
 ul {
     border:2px solid black;
@@ -37,21 +38,9 @@ ul {
   .active {
     background-color: #4CAF50;
   }
-  /* data table */
-  table{
-      margin-top: 5%;
-      font-size: small;
-  }
+   /* data table */
   .thead,
 tr {
-  background-color: honeydew;
-}
-
-.tr,
-th {
-  white-space: nowrap;
-  padding: 1rem;
-  text-align: center;
   background-color: honeydew;
 }
 
@@ -59,14 +48,15 @@ tbody,
 tr:nth-child(odd) {
   background-color: white;
 }
-
-.tbody,
-tr,
-td {
-  white-space: nowrap;
-  width: 10%;
-  overflow-wrap: break-word;
+.td{
+  text-align: right;
 }
+
+
+
+
+  /* 
+
 .Edit{
     cursor: pointer;
     background-color: rgb(212, 212, 212);
@@ -78,4 +68,4 @@ tr:nth-child(odd) .Edit{
 .Edit:hover{
     color: white;
     background-color: rgb(126, 126, 126);
-}
+} */
