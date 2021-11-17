@@ -3,19 +3,17 @@ import "./FinalAnswerPage.css";
 import copyPasteimg from '../../icons/copy.jpg'
 import copySuccessImg from '../../icons/checkIcon.png'
 import { setTimeout } from "timers";
-import { CardTree } from "../../models/cardTree";
+import { QuestionCard,FinalAnswerCard } from "../../models/cardTree";
 import { Link } from "react-router-dom";
 
 
 interface IProps{
-    // cardQuestionnaire: CardQuestionnaire<string>;
-    theWayToSolve?: string;
-    crmDetails:string[];
+    card: FinalAnswerCard;
     setCard: Function;
     setHistory:Function;
-    firstCard:CardTree | undefined
+    firstCard:QuestionCard;
 }
-const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,setHistory,firstCard}) => {
+const FinalAnswerPage: React.FC<IProps> = ({card,setCard,setHistory,firstCard}) => {
     
      const [isCopy,setIsCopy]=useState<boolean>(false)
      
@@ -25,8 +23,8 @@ const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,set
 
 
     const copyPasteAnswer =()=>{
-        if(theWayToSolve !== undefined){
-            navigator.clipboard.writeText(theWayToSolve);
+        if(card.cardTitle !== undefined){
+            navigator.clipboard.writeText(card.cardTitle);
             setIsCopy((prevIsCopy)=>!prevIsCopy)
             if(isCopy){
                 setTimeout(()=>copyPasteAnswer(), 3000);
@@ -36,26 +34,19 @@ const FinalAnswerPage: React.FC<IProps> = ({theWayToSolve,crmDetails,setCard,set
     }
     const inputRef=useRef<HTMLButtonElement>(null);
 
-
-    // const copyPasteImgFun=()=>{
-    //     return copyPasteimg;
-    // }
-
-
     return (    
         <div style={{marginTop:"4%"}}>
                 <h1>שם התשובה הסופית</h1>            
                 <div className="finalDiv">
-                    <h2>תחום:<span> {crmDetails[0]}</span></h2>
-                    
-                    <h2>תת תחום:<span> {crmDetails[1]}</span> </h2>
-                    <h2>שאלה: <span> {crmDetails[2]}</span></h2>
-                    <h2>תת שאלה: <span> {crmDetails[3]}</span></h2>
+                    <h2>תחום:<span> {card.crmField}</span></h2>      
+                    <h2>תת תחום:<span> {card.crmQuestion}</span> </h2>
+                    <h2>שאלה: <span> {card.crmSubField}</span></h2>
+                    <h2>תת שאלה: <span> {card.crmSubQuestion}</span></h2>
                 </div>
          
                 <div className="finalDiv">
                         <h2> איך לטפל בקו ראשון: 
-                             <br/> <span>{theWayToSolve}</span>
+                             <br/> <span>{card.cardTitle}</span>
                         
                         </h2>
                         <button onClick={copyPasteAnswer}>

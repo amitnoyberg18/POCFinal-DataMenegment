@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 // import FirstPage from './Pages/FirstPage/FirstPage';
-import {CardTree} from './models/cardTree';
+import {QuestionCard, FinalAnswerCard} from './models/cardTree';
 import MainPage from './Pages/MainPage/MainPage';
 import historyPng from "../src/icons/history.png";
 import HomePng from "../src/icons/backHomePage.png";
@@ -13,25 +13,21 @@ import Axios from './customHook/useAxios'
 
 
 interface Istate{
-  cardTreeObj: CardTree;
+  FirstCard: QuestionCard;
+  cardTreeObj: QuestionCard | FinalAnswerCard;
 }
 
 const App = () =>{
   const { CardId } = useParams() 
-  const [firstCard,setFirstCard] = useState<Istate["cardTreeObj"]>();
+  const [firstCard,setFirstCard] = useState<Istate["FirstCard"]>();
   const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
-    const c1: CardTree = {id:0,questionText:"0",answers:[ "0"],clicked:0,InCargeSelcted:false}
+    const c1: FinalAnswerCard = {id:0,type:'FinalAnswerCard', cardTitle:"0",clicked:0,ahmashSelected:false,nextCards:null,crmField:"0",crmSubField:"0",crmQuestion:"0",crmSubQuestion:"0"}
     return c1;
   });
   const [isHistoryActive,setIsHistoryActive] = useState(false);
-  // const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
-  //   const newCard = dataCardTree()[0];
-  //   return newCard;
-  // });
-  const [history,setHistory] = useState<CardTree[]>([]);
+  const [history,setHistory] = useState<(QuestionCard | FinalAnswerCard)[]>([]);
   //Fetching data
   useEffect(()=>{
-    console.log(CardId);
     if(CardId){
       Axios(setCard,`http://localhost:8000/api/TheCard/${CardId}`);
       Axios(setFirstCard,`http://localhost:8000/api/TheCard/${CardId}`);
@@ -48,7 +44,7 @@ const App = () =>{
   
   const backToPrevCard = useCallback(()=>{
     // setTimeout(() => {
-      setCard((theCard : CardTree )=>{
+      setCard((theCard : QuestionCard | FinalAnswerCard )=>{
         
         if(theCard?.prevCard!==undefined){   
            setHistory((prevHistory)=>{
@@ -71,16 +67,9 @@ const App = () =>{
     const handleKeyPress = (e:any) => {
         if(e.keyCode !== undefined){
             if(e.keyCode===27){
-              // if(isHistoryActive){
-              //   console.log(isHistoryActive);
-              //   setIsHistoryActive((prevIsHistoryActive)=>!prevIsHistoryActive)
-              // }else{
                 backToPrevCard();
                 const btnPrev=document.getElementById('btnPrevQuesiton')
                 btnPrev?.classList.add("backPrevByKey")
-                // if(card === dataCardTree()[0]){
-                //   setSelectValue("-1");
-                // }
                 setTimeout(() => {
                   btnPrev?.classList.remove("backPrevByKey")
                 }, 400);

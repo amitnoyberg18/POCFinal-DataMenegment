@@ -1,25 +1,14 @@
 import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CardTree } from "../../models/cardTree";
+import { QuestionCard ,FinalAnswerCard } from "../../models/cardTree";
 
 
 interface IProps{
-    card:CardTree;
+    card:QuestionCard | FinalAnswerCard;
     index:number;
 }
 const InCargeSelection: React.FC<IProps> = ({card,index}) => {
-    //the next function shows the card that the in charge selected
-
-
-    // const onSelectAnswer = useCallback(()=>{
-    //     setCard(card)
-    // },[card,setCard])
-
-
-
-    //this function handles the key press
-
-
+    
     const  handleKeyPress =  useCallback((e) => {
 
             if(e.code === 'Digit'+(index+1)){
@@ -42,7 +31,7 @@ const InCargeSelection: React.FC<IProps> = ({card,index}) => {
         <Link to={`/mainApp/${card.id}`}>
             <div id={index.toString()} className="InchargeSelectedCard">
                 <p style={{float:"right",marginRight:"10%"}}>({index+1})</p>
-                <p style={{marginLeft:"10%"}}>{card.questionText}</p>
+                <p style={{marginLeft:"10%"}}>{card.cardTitle}</p>
             </div>
         </Link>
      );
