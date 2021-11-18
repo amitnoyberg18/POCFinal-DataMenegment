@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardTree } from "../../models/cardTree";
+import { QuestionCard, FinalAnswerCard } from "../../models/cardTree";
 import FinalAnswerPage from '../../Pages/FinalAnswerPage.tsx/FinalAnswerPage';
 import Answer from "./Answer";
 import History from "../History/History";
@@ -12,34 +12,27 @@ import "./MainPage.css";
 // import { isTemplateSpan } from "typescript";
 
 interface IProps{
-    card?:CardTree;
+    card?:QuestionCard | FinalAnswerCard;
     isHistoryActive:boolean;
-    history:CardTree[];
+    history:(QuestionCard | FinalAnswerCard)[];
     setCard:Function;
     setHistory:Function;
     setIsHistoryActive:Function;
-    firstCard:CardTree | undefined;
+    firstCard:QuestionCard | undefined;
 
 }
 const MainPage: React.FC<IProps> = ({card,setHistory,setCard,history,isHistoryActive,setIsHistoryActive,firstCard})=>{
-    const [data,setData] = useState<CardTree[]>([])
+    const [data,setData] = useState<FinalAnswerCard[]>([])
     const getAnswersArr =()=>{
-        if(card?.answers!==undefined)
-          return card.answers
+        if((card as QuestionCard).answers!==undefined)
+          return (card as QuestionCard).answers
     
         return []
       }
     
       useEffect(()=>{
-        const arr:CardTree[] = [] 
-        // setData(dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined))
+        const arr:(QuestionCard | FinalAnswerCard)[] = [] 
         Axios(setData,`http://localhost:8000/api/MostClicked/${card?.id}`)
-        for (let index = 0; index < data.length; index++) {
-            const element:CardTree = data[index]; 
-            arr.push(element);     
-        }
-        console.log(arr)
-        setData(arr);
     },[card])
     return (
         <div className="Main">
@@ -52,14 +45,14 @@ const MainPage: React.FC<IProps> = ({card,setHistory,setCard,history,isHistoryAc
               {!isHistoryActive && card?.nextCards!==undefined && 
                 <div className="card">
                     <div className="question">
-                        <h2>{card.questionText}</h2>
+                        <h2>{card.cardTitle}</h2>
                     </div>
                   {getAnswersArr().map((answer,index)=>{
-                    return <Answer card={card} setHistory={setHistory} answer={answer} index={index} key={index} setCard={setCard}/>
+                    return <Answer setHistory={setHistory} answer={answer} index={index} key={index} setCard={setCard}/>
                   })}
                 </div>}   
               {/* TheFinalAnswerPage is here for the styling */}
-            {!isHistoryActive && card?.nextCards === undefined  &&<FinalAnswerPage firstCard={firstCard} setHistory={setHistory} theWayToSolve={card?.questionText} crmDetails={getAnswersArr()} setCard={setCard}/>}     
+            {!isHistoryActive && card?.nextCards === undefined  &&<FinalAnswerPage firstCard={firstCard as QuestionCard} setHistory={setHistory} card={card as FinalAnswerCard} setCard={setCard}/>}     
           </div>
           {!isHistoryActive && card?.nextCards!==undefined &&<div style={{marginTop: '10%',marginRight:'10%'}} className="commonAnswers">
             <hr />
@@ -69,8 +62,8 @@ const MainPage: React.FC<IProps> = ({card,setHistory,setCard,history,isHistoryAc
                 return <CommonAnswers key={index} setHistory={setHistory} card={item} setCard={setCard}/>
               })} */}
               {data !== undefined && <div className="ThecommonAnswers">
-                {data.map((item:CardTree,index:number)=>{
-                return <CommonAnswers data={data} key={index} setHistory={setHistory} card={item} setCard={setCard}/>
+                {(data as FinalAnswerCard[]).map((item:FinalAnswerCard,index:number)=>{
+                return <CommonAnswers key={index} setHistory={setHistory} item={item} setCard={setCard}/>
                 
               })}
               </div>}

@@ -1,35 +1,30 @@
 import React, { useCallback, useEffect, useRef } from "react";
 // import CardQuestionnaire from "../classes/cardQuestion"
-import { CardTree } from "../../models/cardTree";
+import { QuestionCard, FinalAnswerCard } from "../../models/cardTree";
 // import {CSSTransition,TransitionGroup} from 'react-transition-group';
 
 
 
 interface IProps{
-    card:CardTree;
     answer: string;
     index:number;
     setCard:Function;
     setHistory:Function;
 
 }
-const Answer: React.FC<IProps> = ({card,answer,setCard,index,setHistory}) => {
+const Answer: React.FC<IProps> = ({answer,setCard,index,setHistory}) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
     const onSelectAnswer = useCallback(()=>{
-        setCard((prevCard:CardTree) =>{
+        setCard((prevCard:QuestionCard) =>{
             prevCard.indexSelectedAnswer=index;
-            if(prevCard.nextCards!==undefined){
-                prevCard.nextCards[index].prevCard=prevCard;   
-                setHistory((history:CardTree[])=>{
-                    history.push(prevCard);
-                    return history;
-                })
-                return prevCard.nextCards[index];
+            prevCard.nextCards[index].prevCard=prevCard;   
+            setHistory((history:(QuestionCard | FinalAnswerCard)[])=>{
+                history.push(prevCard);
+                return history;
+            })
+            return prevCard.nextCards[index];
         
-            }
-
-                return undefined;
         })
     },[index,setCard,setHistory])
     const  handleKeyPress =  useCallback((e) => {

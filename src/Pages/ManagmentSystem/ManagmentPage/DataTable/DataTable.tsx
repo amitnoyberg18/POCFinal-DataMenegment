@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardTree } from "../../../../models/cardTree";
+import { QuestionCard , FinalAnswerCard } from "../../../../models/cardTree";
 import '../MainApp.css'
 import Axios from '../../../../customHook/useAxios';
 import MaterialTable from 'material-table'
@@ -7,7 +7,7 @@ import MaterialTable from 'material-table'
 
 
 interface Istate{
-    data:CardTree[],
+    data:(QuestionCard | FinalAnswerCard)[],
     query:string;
 }
 interface IProps{
@@ -56,7 +56,7 @@ const DataTable : React.FC<IProps>=({url,TableName})=>{
     }]);//by knowing the url we will present different columns
 
     useEffect(()=>{
-        const arr:CardTree[] = [] 
+        const arr:(QuestionCard | FinalAnswerCard)[] = [] 
         Axios(setData,url).then(()=>setData((data)=>{
             data.map((item)=>{
                 return {...data,'id': 1}
@@ -65,7 +65,7 @@ const DataTable : React.FC<IProps>=({url,TableName})=>{
             return data; 
         }));
         for (let index = 0; index < data.length; index++) {
-            const element:CardTree = data[index]; 
+            const element:QuestionCard | FinalAnswerCard = data[index]; 
             arr.push(element);     
         }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./FirstPage.css"
 import InCargeSelection from "./InChargeSelection";
-import { CardTree } from "../../models/cardTree";
+import { QuestionCard, FinalAnswerCard } from "../../models/cardTree";
 import compass from "../../icons/compass.png";
 // import App from "../../App";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import Axios from '../../customHook/useAxios';
 
 
 interface Istate{
-    cardTreeArray:CardTree[];
+    cardTreeArray:(QuestionCard | FinalAnswerCard)[];
 }
 
 

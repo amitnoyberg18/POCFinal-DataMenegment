@@ -5,8 +5,6 @@ import './MainApp.css';
 import HomePng from "../../../icons/backHomePage.png";
 
 
-
-
 // interface Istate{
 //     data:CardTree[],
 //     query:string;
