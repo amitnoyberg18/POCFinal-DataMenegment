@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { QuestionCard , FinalAnswerCard } from "../../../../models/cardTree";
 import '../MainApp.css'
 import Axios from '../../../../customHook/useAxios';
-import MaterialTable from 'material-table'
+import MaterialTable, { Column } from 'material-table'
 
 
 
@@ -12,62 +12,32 @@ interface Istate{
 }
 interface IProps{
     url:string,
-    TableName:string
+    TableName:string,
+    columns:Column<QuestionCard | FinalAnswerCard>[]
 }
 
 
 
-const DataTable : React.FC<IProps>=({url,TableName})=>{
+const DataTable : React.FC<IProps>=({url,TableName,columns})=>{
 
     const [data,setData] = useState<Istate["data"]>([]);
     // const Thecolumns = data[0] && Object.keys(data[0]);
-    const [columns,setColumns] = useState([{
-        title:'מזהה',
-        field: 'id',
-        cellStyle:{
-            textAlign:'center'
-        }
-    },{
-        title:'שאלה',
-        field: 'questionText',
-        cellStyle:{
-            textAlign:'center'
-        }
-    },
-    {
-        title:'תשובות',
-        field: 'answers',
-        cellStyle:{
-            textAlign:'center'
-        }
-    },
-    {
-        title:'כמות לחיצות',
-        field: 'clicked',
-        cellStyle:{
-            textAlign:'center'
-        }
-    },{
-        title:'נבחר ע"י האחמ"ש',
-        field: 'InCargeSelcted',
-        cellStyle:{
-            textAlign:'center'
-        }
-    }]);//by knowing the url we will present different columns
+
 
     useEffect(()=>{
-        const arr:(QuestionCard | FinalAnswerCard)[] = [] 
-        Axios(setData,url).then(()=>setData((data)=>{
-            data.map((item)=>{
-                return {...data,'id': 1}
-            })   
-            console.log(data);
-            return data; 
-        }));
-        for (let index = 0; index < data.length; index++) {
-            const element:QuestionCard | FinalAnswerCard = data[index]; 
-            arr.push(element);     
-        }
+        // const arr:(QuestionCard | FinalAnswerCard)[] = [] 
+        Axios(setData,url)
+        // .then(()=>setData((data)=>{
+        //     data.map((item)=>{
+        //         return {...data,'id': 1}
+        //     })   
+        //     console.log(data);
+        //     return data; 
+        // }));
+        // for (let index = 0; index < data.length; index++) {
+        //     const element:QuestionCard | FinalAnswerCard = data[index]; 
+        //     arr.push(element);     
+        // }
 
 
     },[setData,url])
@@ -75,45 +45,11 @@ const DataTable : React.FC<IProps>=({url,TableName})=>{
 
     return (
         <div className="DataTable">
-            <MaterialTable title={TableName}
+            <MaterialTable title={TableName} onChangePage={()=>{
+                console.log("d")
+            }}
                 data={data}
-                columns={[{
-                        title:'מזהה',
-                        field: 'id',
-                        editable:'never',
-                        cellStyle:{
-                            textAlign:'center'
-                        },
-                    },{
-                        title:'שאלה',
-                        field: 'questionText',
-                        cellStyle:{
-                            textAlign:'center'
-                        }
-                    },
-                    // {
-                    //     title:'תשובות',
-                    //     field: 'answers',
-                    //     cellStyle:{
-                    //         textAlign:'center'
-                    //     }
-                    // },
-                    {
-                        title:'כמות לחיצות',
-                        field: 'clicked',
-                        editable:'never',
-
-                        cellStyle:{
-                            textAlign:'center'
-                        }
-                    },{
-                        title:'נבחר ע"י האחמ"ש',
-                        field: 'InCargeSelcted',
-                        editable:'never',
-                        cellStyle:{
-                            textAlign:'center'
-                        }
-                    }]}
+                columns={columns}
                 options={{
                     filtering:true,
                     exportButton:true,
@@ -121,7 +57,6 @@ const DataTable : React.FC<IProps>=({url,TableName})=>{
                     selection: true,
                     headerStyle:{
                         textAlign:'center'
-
                     }
                 }}
                 editable={{
@@ -137,6 +72,7 @@ const DataTable : React.FC<IProps>=({url,TableName})=>{
                     new Promise((resolve, reject) => {
                       setTimeout(() => {
                         const dataUpdate = [...data];
+                        console.log(dataUpdate)
                         // const index = oldData.tableData.id;
                         // dataUpdate[index] = newData;
                         // setData([...dataUpdate]);

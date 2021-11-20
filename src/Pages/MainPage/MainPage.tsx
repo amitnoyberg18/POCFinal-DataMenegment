@@ -31,7 +31,7 @@ const MainPage: React.FC<IProps> = ({card,setHistory,setCard,history,isHistoryAc
       }
     
       useEffect(()=>{
-        const arr:(QuestionCard | FinalAnswerCard)[] = [] 
+        // const arr:(QuestionCard | FinalAnswerCard)[] = [] 
         Axios(setData,`http://localhost:8000/api/MostClicked/${card?.id}`)
     },[card])
     return (

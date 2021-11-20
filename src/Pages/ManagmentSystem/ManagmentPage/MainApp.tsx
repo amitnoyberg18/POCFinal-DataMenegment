@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import DataTable from "./DataTable/DataTable";
 import './MainApp.css';
 import HomePng from "../../../icons/backHomePage.png";
+import { Column } from "material-table";
+import { FinalAnswerCard, QuestionCard } from "../../../models/cardTree";
 
 
 // interface Istate{
@@ -13,21 +15,132 @@ import HomePng from "../../../icons/backHomePage.png";
 const MainApp=()=>{
     const [header,setHeader] = useState("כרטיסים")
     const { page } = useParams(); 
-    const [url,setUrl] = useState<string>('http://localhost:8000/api/InchargeSelected');
+    const [url,setUrl] = useState<string>('http://localhost:8000/api/Cards');
+    const [columns,setColumns] = useState<Column<QuestionCard | FinalAnswerCard>[]>([{
+        title:'מזהה',
+        field: 'id',
+        cellStyle:{
+            textAlign:'center'
+        },
+        editable: 'never'
+    },
+    {
+        title:'כמות לחיצות',
+        field: 'clicked',
+        cellStyle:{
+            textAlign:'center'
+        },
+        editable: 'never'
+    },{
+        title:'נבחר ע"י האחמ"ש',
+        field: 'ahmashSelected',
+        cellStyle:{
+            textAlign:'center'
+        }
+    }])
+
     useEffect(()=>{
         if(page !== undefined){
             if(page === "questions"){
-                setUrl("");
+                setUrl("http://localhost:8000/api/Questions");
                 document.getElementById("questions")?.classList.add("active");
                 setHeader("שאלות")
+                setColumns((prevCol)=>{
+                    return [...prevCol,{
+                        title:'שאלות',
+                        field: 'cardTitle',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'תשובה 1',
+                        field: 'answers[0]',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'תשובה 2',
+                        field: 'answers[1]',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'תשובה 3',
+                        field: 'answers[2]',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'תשובה 4',
+                        field: 'answers[3]',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'תשובה 5',
+                        field: 'answers[4]',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'תשובה 6',
+                        field: 'answers[5]',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    }]
+                })
             }else if(page === "answers"){
-                setUrl("http://localhost:8000/api/MostClicked/1");
+                setUrl("http://localhost:8000/api/Answers");
                 document.getElementById("answers")?.classList.add("active")
                 setHeader("תשובות")
+                setColumns((prevCol)=>{
+                    return [...prevCol,{
+                        title:'תחום',
+                        field: 'crmField',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'תת תחום',
+                        field: 'crmSubField',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'שאלה',
+                        field: 'crmQuestion',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'תת שאלה',
+                        field: 'crmSubQuestion',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    },{
+                        title:'איך לטפל בקו ראשון',
+                        field: 'cardTitle',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                    }]
+                })
             }else{
-                setUrl('http://localhost:8000/api/InchargeSelected');
+                setUrl('http://localhost:8000/api/Cards');
                 document.getElementById("cards")?.classList.add("active")
                 setHeader("כרטיסים");
+                setColumns((prevCol)=>{
+                    return [...prevCol,{
+                        title:'שאלה/דרך פיתרון',
+                        field:'cardTitle',
+                        cellStyle:{
+                            textAlign:'center'
+                        }
+                        
+                    }]
+                })
 
             }
         }
@@ -46,7 +159,7 @@ const MainApp=()=>{
                 </ul>
             </div>
             <div className="TheData">
-                <DataTable url={url} TableName={header}/>
+                <DataTable columns={columns} url={url} TableName={header}/>
             </div>
             <br />
 
