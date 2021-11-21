@@ -13,26 +13,26 @@ interface IProps{
 
 const SearchBar:React.FC<IProps> = ({setHistory,setCard})=>{
     
-    const [data,setData] = useState<(QuestionCard | FinalAnswerCard)[]>([]);
-    const [filterData,setFilterData]=useState<(QuestionCard | FinalAnswerCard)[]>([]);
+    const [data,setData] = useState<FinalAnswerCard[]>([]);
+    const [filterData,setFilterData]=useState<FinalAnswerCard[]>([]);
     const [value,setValue] = useState<string>("");
 
 
     useEffect(()=>{
-        const arr:(QuestionCard | FinalAnswerCard)[] = [] 
+        // const arr:(QuestionCard | FinalAnswerCard)[] = [] 
         // setData(dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined))
         Axios(setData,`http://localhost:8000/api/Answers`)
-        for (let index = 0; index < data.length; index++) {
-            const element:QuestionCard | FinalAnswerCard = data[index]; 
-            arr.push(element);     
-        }
-        console.log(arr);
-        setData(arr);
+        // for (let index = 0; index < data.length; index++) {
+        //     const element:QuestionCard | FinalAnswerCard = data[index]; 
+        //     arr.push(element);     
+        // }
+        // console.log(arr);
+        // setData(arr);
     },[setData])
 
     const handleFilter = (e:React.ChangeEvent<HTMLInputElement>)=>{
         console.log(data);
-        const newFilter = data.filter((item:QuestionCard | FinalAnswerCard)=>{
+        const newFilter = data.filter((item:FinalAnswerCard)=>{
             return item.cardTitle.includes(e.target.value);
         });
         setFilterData(newFilter);
@@ -51,7 +51,7 @@ const SearchBar:React.FC<IProps> = ({setHistory,setCard})=>{
         </div>
         {filterData.length !== 0 && value !=="" &&
         <div className="dataResult">
-            {filterData.slice(0,5).map((item:QuestionCard | FinalAnswerCard,index:number)=>{
+            {filterData.slice(0,5).map((item:FinalAnswerCard,index:number)=>{
                     // return <option key={index} value={index.toString()}>{item.questionText}</option>
                     // return <a href="/#" key={index} className="dataItem" onClick={()=>{
                         return <p key={index} className="dataItem" onClick={()=>{

@@ -28,9 +28,10 @@ const App = () =>{
   const [history,setHistory] = useState<(QuestionCard | FinalAnswerCard)[]>([]);
   //Fetching data
   useEffect(()=>{
+    console.log()
     if(CardId){
-      Axios(setCard,`http://localhost:8000/api/TheCard/${CardId}`);
-      Axios(setFirstCard,`http://localhost:8000/api/TheCard/${CardId}`);
+      Axios(setCard,`http://localhost:8000/api/card/${CardId}`);
+      Axios(setFirstCard,`http://localhost:8000/api/card/${CardId}`);
     }else{
       Axios(setCard,'http://localhost:8000/api/');
       Axios(setFirstCard,'http://localhost:8000/api/');
