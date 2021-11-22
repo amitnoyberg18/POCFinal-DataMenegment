@@ -32,7 +32,7 @@ const MainPage: React.FC<IProps> = ({card,setHistory,setCard,history,isHistoryAc
     
       useEffect(()=>{
         // const arr:(QuestionCard | FinalAnswerCard)[] = [] 
-        Axios(setData,`http://localhost:8000/api/MostClicked/${card?.id}`)
+        Axios(setData,`http://localhost:8000/api/card/MostClicked/${card?.id}`)
     },[card])
     return (
         <div className="Main">
@@ -42,7 +42,7 @@ const MainPage: React.FC<IProps> = ({card,setHistory,setCard,history,isHistoryAc
               <SearchBar setCard={setCard} setHistory={setHistory}/>
               {/* history page  */}
               {isHistoryActive && <History setIsHistoryActive={setIsHistoryActive} history={history} setHistory={setHistory} setCard={setCard} />}
-              {!isHistoryActive && card?.nextCards!==undefined && 
+              {!isHistoryActive &&card !== undefined && (card as QuestionCard)?.nextCards!==undefined && 
                 <div className="card">
                     <div className="question">
                         <h2>{card.cardTitle}</h2>
@@ -52,9 +52,9 @@ const MainPage: React.FC<IProps> = ({card,setHistory,setCard,history,isHistoryAc
                   })}
                 </div>}   
               {/* TheFinalAnswerPage is here for the styling */}
-            {!isHistoryActive && card?.nextCards === undefined  &&<FinalAnswerPage firstCard={firstCard as QuestionCard} setHistory={setHistory} card={card as FinalAnswerCard} setCard={setCard}/>}     
+            {!isHistoryActive && card !== undefined && (card as QuestionCard)?.nextCards === undefined  &&<FinalAnswerPage firstCard={firstCard as QuestionCard} setHistory={setHistory} card={card as FinalAnswerCard} setCard={setCard}/>}     
           </div>
-          {!isHistoryActive && card?.nextCards!==undefined &&<div style={{marginTop: '10%',marginRight:'10%'}} className="commonAnswers">
+          {!isHistoryActive &&  (card as QuestionCard)?.nextCards!==undefined &&<div style={{marginTop: '10%',marginRight:'10%'}} className="commonAnswers">
             <hr />
               <h1>תשובות נפוצות</h1>
             

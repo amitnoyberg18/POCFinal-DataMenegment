@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { QuestionCard , FinalAnswerCard } from "../../../../models/cardTree";
 import '../MainApp.css'
 import getAxios from '../../../../customHook/getAxios';
-import MaterialTable, { Column } from 'material-table';
+import MaterialTable, {  MaterialTableProps ,Column } from 'material-table';
 import patchAxios from '../../../../customHook/patchAxios';
 
 
 
 interface Istate{
     data:(QuestionCard | FinalAnswerCard)[],
-    query:string;
 }
 interface IProps{
     url:string,
@@ -46,9 +45,7 @@ const DataTable : React.FC<IProps>=({url,TableName,columns})=>{
 
     return (
         <div className="DataTable">
-            <MaterialTable title={TableName} onChangePage={()=>{
-                console.log("d")
-            }}
+            <MaterialTable title={TableName} 
                 data={data}
                 columns={columns}
                 options={{
@@ -61,23 +58,32 @@ const DataTable : React.FC<IProps>=({url,TableName,columns})=>{
                     }
                 }}
                 editable={{
-                    onRowAdd:(newRow)=>new Promise((resolve,reject)=>{
-                        const c1:QuestionCard = {id:data[data.length-1].id+1,cardTitle:newRow.cardTitle,type:"QuestionCard",clicked:0,ahmashSelected:newRow.ahmashSelected,nextCards:[],answers:[]}
-                        const updatedData=[...data,c1]//will send a post request to the server 
+                    onRowAdd:(newRow)=>new Promise<void>((resolve,reject)=>{
+
                         setTimeout(() => {
+                            if(TableName === "שאלות"){
+                                console.log(newRow)
+                                alert('you cant create a question yet');
+                            }else if(TableName === "תשובות סופיות"){
+                                console.log(newRow)
+                                alert('you cant create a FinalAnswer yet');
+                            }
                             // setData - doesnt supposed to be relevent
-                            console.log(updatedData);
-                            // resolve()
+                            // console.log(updatedData);
+                            resolve()
                         }, 2000);
                     }),
                     onRowUpdate: (newData, oldData) =>
                     new Promise<void>((resolve, reject) => {
                       setTimeout(() => {
+                          if(TableName === "שאלות"){
+                              console.log(newData, typeof newData)
+                              alert('you cant edit questions yet');
+                          }
+
                           console.log(newData)
-                        // const index = oldData.tableData.id;
-                        // dataUpdate[index] = newData;
-                        patchAxios(newData,'http://localhost:8000/api/updateCard')
-                        window.location.href='http://localhost:3000/ManagePage/MainApp/cards'
+                        // patchAxios(newData,'http://localhost:8000/api/updateCard')
+                        // window.location.href='http://localhost:3000/ManagePage/MainApp/cards'
                         resolve();
                       }, 1000)
                     }),

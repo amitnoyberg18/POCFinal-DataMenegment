@@ -21,7 +21,7 @@ const App = () =>{
   const { CardId } = useParams() 
   const [firstCard,setFirstCard] = useState<Istate["FirstCard"]>();
   const [card,setCard]=useState<Istate["cardTreeObj"]>(()=>{
-    const c1: FinalAnswerCard = {id:0,type:'FinalAnswerCard', cardTitle:"0",clicked:0,ahmashSelected:false,nextCards:null,crmField:"0",crmSubField:"0",crmQuestion:"0",crmSubQuestion:"0"}
+    const c1: FinalAnswerCard = {id:1,type:'FinalAnswerCard', cardTitle:"0",clicked:0,ahmashSelected:false,crmField:"0",crmSubField:"0",crmQuestion:"0",crmSubQuestion:"0"}
     return c1;
   });
   const [isHistoryActive,setIsHistoryActive] = useState(false);
@@ -33,8 +33,9 @@ const App = () =>{
       Axios(setCard,`http://localhost:8000/api/card/${CardId}`);
       Axios(setFirstCard,`http://localhost:8000/api/card/${CardId}`);
     }else{
-      Axios(setCard,'http://localhost:8000/api/');
-      Axios(setFirstCard,'http://localhost:8000/api/');
+      Axios(setCard,'http://localhost:8000/api/card/firstCard');
+      Axios(setFirstCard,'http://localhost:8000/api/card/firstCard');
+      
     }
 },[CardId])
 

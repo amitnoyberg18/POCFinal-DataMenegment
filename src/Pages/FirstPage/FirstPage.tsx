@@ -18,7 +18,7 @@ const FirstPage=()=>{
     const [inCargeSelection,setInCargeSelection] = useState<Istate["cardTreeArray"]>([]);
 
     useEffect(()=>{
-        Axios(setInCargeSelection,'http://localhost:8000/api/InchargeSelected');
+        Axios(setInCargeSelection,'http://localhost:8000/api/card/InchargeSelected');
     },[])
     return (
         <div className="FirstPage">
