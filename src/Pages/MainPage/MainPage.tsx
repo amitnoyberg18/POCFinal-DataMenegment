@@ -5,7 +5,7 @@ import Answer from "./Answer";
 import History from "../History/History";
 import CommonAnswers from "../MainPage/CommonAnswers/CommonAnswers";
 import SearchBar from "./SearchBar";
-import Axios from '../../customHook/useAxios';
+import Axios from '../../customHook/getAxios';
 
 
 import "./MainPage.css";

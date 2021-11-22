@@ -8,7 +8,7 @@ import HomePng from "../src/icons/backHomePage.png";
 import BackPng from "./icons/back.png";
 // import {CSSTransition} from 'react-transition-group';
 import { Link,useParams } from "react-router-dom";
-import Axios from './customHook/useAxios'
+import Axios from './customHook/getAxios'
 
 
 

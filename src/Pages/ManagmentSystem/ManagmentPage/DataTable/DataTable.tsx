@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { QuestionCard , FinalAnswerCard } from "../../../../models/cardTree";
 import '../MainApp.css'
-import Axios from '../../../../customHook/useAxios';
-import MaterialTable, { Column } from 'material-table'
+import getAxios from '../../../../customHook/getAxios';
+import MaterialTable, { Column } from 'material-table';
+import patchAxios from '../../../../customHook/patchAxios';
 
 
 
@@ -26,7 +27,7 @@ const DataTable : React.FC<IProps>=({url,TableName,columns})=>{
 
     useEffect(()=>{
         // const arr:(QuestionCard | FinalAnswerCard)[] = [] 
-        Axios(setData,url)
+        getAxios(setData,url)
         // .then(()=>setData((data)=>{
         //     data.map((item)=>{
         //         return {...data,'id': 1}
@@ -61,7 +62,8 @@ const DataTable : React.FC<IProps>=({url,TableName,columns})=>{
                 }}
                 editable={{
                     onRowAdd:(newRow)=>new Promise((resolve,reject)=>{
-                        const updatedData=[...data,newRow]//will send a post request to the server 
+                        const c1:QuestionCard = {id:data[data.length-1].id+1,cardTitle:newRow.cardTitle,type:"QuestionCard",clicked:0,ahmashSelected:newRow.ahmashSelected,nextCards:[],answers:[]}
+                        const updatedData=[...data,c1]//will send a post request to the server 
                         setTimeout(() => {
                             // setData - doesnt supposed to be relevent
                             console.log(updatedData);
@@ -69,15 +71,14 @@ const DataTable : React.FC<IProps>=({url,TableName,columns})=>{
                         }, 2000);
                     }),
                     onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve, reject) => {
+                    new Promise<void>((resolve, reject) => {
                       setTimeout(() => {
-                        const dataUpdate = [...data];
-                        console.log(dataUpdate)
+                          console.log(newData)
                         // const index = oldData.tableData.id;
                         // dataUpdate[index] = newData;
-                        // setData([...dataUpdate]);
-          
-                        // resolve();
+                        patchAxios(newData,'http://localhost:8000/api/updateCard')
+                        window.location.href='http://localhost:3000/ManagePage/MainApp/cards'
+                        resolve();
                       }, 1000)
                     }),
                   onRowDelete: oldData =>
