@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { QuestionCard ,FinalAnswerCard } from "../../models/cardTree";
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
-import Axios from '../../customHook/useAxios';
+import Axios from '../../customHook/getAxios';
 
 // create a new check box
 

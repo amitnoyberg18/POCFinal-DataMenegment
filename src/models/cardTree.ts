@@ -21,7 +21,6 @@ export type FinalAnswerCard  =  Card & {
     crmSubField:string,
     crmQuestion :string,
     crmSubQuestion:string,
-    nextCards?:null
 }
 
 // export type CardTree =  { 

@@ -6,7 +6,7 @@ import compass from "../../icons/compass.png";
 // import App from "../../App";
 import { Link } from "react-router-dom";
 // import { CSSTransition } from "react-transition-group";
-import Axios from '../../customHook/useAxios';
+import Axios from '../../customHook/getAxios';
 
 
 interface Istate{
