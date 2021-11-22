@@ -22,7 +22,7 @@ const MainApp=()=>{
         cellStyle:{
             textAlign:'center'
         },
-        editable: 'never'
+        editable: 'never',
     },
     {
         title:'כמות לחיצות',
@@ -36,13 +36,14 @@ const MainApp=()=>{
         field: 'ahmashSelected',
         cellStyle:{
             textAlign:'center'
-        }
+        },
+        lookup: { 'true': 'true', 'false': 'false' }
     }])
 
     useEffect(()=>{
         if(page !== undefined){
             if(page === "questions"){
-                setUrl("http://localhost:8000/api/Questions");
+                setUrl("http://localhost:8000/api/card/cardQuestion/all");
                 document.getElementById("questions")?.classList.add("active");
                 setHeader("שאלות")
                 setColumns((prevCol)=>{
@@ -51,19 +52,23 @@ const MainApp=()=>{
                         field: 'cardTitle',
                         cellStyle:{
                             textAlign:'center'
-                        }
+                        },
+                        validate: rowData => String(rowData.cardTitle) === '' ? 'שאלה לא יכולה להיות ריקה' : ''
+
                     },{
                         title:'תשובה 1',
                         field: 'answers[0]',
                         cellStyle:{
                             textAlign:'center'
-                        }
+                        },
+                        validate: rowData => String((rowData as QuestionCard).answers[0]) === '' ? 'תשובה 1 לא יכולה להיות ריקה' : ''
                     },{
                         title:'תשובה 2',
                         field: 'answers[1]',
                         cellStyle:{
                             textAlign:'center'
-                        }
+                        },
+                        validate: rowData => String((rowData as QuestionCard).answers[1]) === '' ? 'תשובה 2 לא יכולה להיות ריקה' : ''
                     },{
                         title:'תשובה 3',
                         field: 'answers[2]',
@@ -91,40 +96,45 @@ const MainApp=()=>{
                     }]
                 })
             }else if(page === "answers"){
-                setUrl("http://localhost:8000/api/Answers");
+                setUrl("http://localhost:8000/api/card/finalAnswer/all");
                 document.getElementById("answers")?.classList.add("active")
-                setHeader("תשובות")
+                setHeader("תשובות סופיות")
                 setColumns((prevCol)=>{
                     return [...prevCol,{
                         title:'תחום',
                         field: 'crmField',
                         cellStyle:{
                             textAlign:'center'
-                        }
+                        },
+                        validate: rowData => String((rowData as FinalAnswerCard).crmField) === '' ? 'תחום לא יכול להיות ריק' : ''
                     },{
                         title:'תת תחום',
                         field: 'crmSubField',
                         cellStyle:{
                             textAlign:'center'
-                        }
+                        },
+                        validate: rowData => String((rowData as FinalAnswerCard).crmSubField) === '' ? 'תת תחום לא יכול להיות ריק' : ''
                     },{
                         title:'שאלה',
                         field: 'crmQuestion',
                         cellStyle:{
                             textAlign:'center'
-                        }
+                        },
+                        validate: rowData => String((rowData as FinalAnswerCard).crmQuestion) === '' ? 'שאלה לא יכולה להיות ריקה' : ''
                     },{
                         title:'תת שאלה',
                         field: 'crmSubQuestion',
                         cellStyle:{
                             textAlign:'center'
-                        }
+                        },
+                        validate: rowData => String((rowData as FinalAnswerCard).crmSubQuestion) === '' ? 'תת שאלה לא יכולה להיות ריקה' : ''
                     },{
                         title:'איך לטפל בקו ראשון',
                         field: 'cardTitle',
                         cellStyle:{
                             textAlign:'center'
-                        }
+                        },
+                        validate: rowData => String((rowData as FinalAnswerCard).cardTitle) === '' ? 'לא יכול להיות ריק' : ''
                     }]
                 })
             }else{

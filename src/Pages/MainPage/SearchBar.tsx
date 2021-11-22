@@ -21,7 +21,7 @@ const SearchBar:React.FC<IProps> = ({setHistory,setCard})=>{
     useEffect(()=>{
         // const arr:(QuestionCard | FinalAnswerCard)[] = [] 
         // setData(dataCardTree().filter((item:CardTree,index:number)=>item.nextCards === undefined))
-        Axios(setData,`http://localhost:8000/api/Answers`)
+        Axios(setData,`http://localhost:8000/api/card/finalAnswer/all`)
         // for (let index = 0; index < data.length; index++) {
         //     const element:QuestionCard | FinalAnswerCard = data[index]; 
         //     arr.push(element);     
